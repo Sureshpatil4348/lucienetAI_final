@@ -1,0 +1,192 @@
+
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { 
+  Send,
+  PhoneCall, 
+  Mail, 
+  MapPin, 
+  Clock,
+  MessageCircle
+} from "lucide-react";
+
+const ContactSection = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Contact form submitted");
+    // In a real implementation, this would connect to a backend API
+  };
+
+  return (
+    <div className="py-20 bg-lucent-navy relative">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Get in <span className="gradient-text">Touch</span>
+          </h2>
+          <p className="text-gray-300">
+            Our team of experts is ready to answer your questions and help you discover how Lucent AI can transform your trading.
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 shadow-lg">
+            <h3 className="text-2xl font-bold mb-6">Send Us a Message</h3>
+            
+            <form onSubmit={handleSubmit}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                <div>
+                  <label htmlFor="name" className="block text-white mb-2">
+                    Full Name
+                  </label>
+                  <Input
+                    id="name"
+                    placeholder="Your full name"
+                    className="bg-white/5 border border-white/10 focus:border-lucent-purple"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="email" className="block text-white mb-2">
+                    Email Address
+                  </label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="Your email address"
+                    className="bg-white/5 border border-white/10 focus:border-lucent-purple"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="phone" className="block text-white mb-2">
+                    Phone Number
+                  </label>
+                  <Input
+                    id="phone"
+                    placeholder="Your phone number"
+                    className="bg-white/5 border border-white/10 focus:border-lucent-purple"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="subject" className="block text-white mb-2">
+                    Subject
+                  </label>
+                  <Input
+                    id="subject"
+                    placeholder="How can we help?"
+                    className="bg-white/5 border border-white/10 focus:border-lucent-purple"
+                  />
+                </div>
+              </div>
+              
+              <div className="mb-6">
+                <label htmlFor="message" className="block text-white mb-2">
+                  Message
+                </label>
+                <Textarea
+                  id="message"
+                  rows={5}
+                  placeholder="Please provide details about your inquiry..."
+                  className="bg-white/5 border border-white/10 focus:border-lucent-purple resize-none"
+                />
+              </div>
+              
+              <Button type="submit" className="btn-primary w-full sm:w-auto">
+                Send Message <Send className="ml-2 h-4 w-4" />
+              </Button>
+            </form>
+          </div>
+          
+          <div>
+            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 shadow-lg mb-8">
+              <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
+              
+              <div className="space-y-6">
+                <div className="flex">
+                  <div className="mr-4">
+                    <div className="h-10 w-10 rounded-full bg-lucent-purple/20 flex items-center justify-center">
+                      <PhoneCall className="h-5 w-5 text-lucent-purple" />
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-white mb-1">Phone</h4>
+                    <p className="text-gray-400">+1 (555) 123-4567</p>
+                    <p className="text-gray-400">+1 (555) 987-6543</p>
+                  </div>
+                </div>
+                
+                <div className="flex">
+                  <div className="mr-4">
+                    <div className="h-10 w-10 rounded-full bg-lucent-purple/20 flex items-center justify-center">
+                      <Mail className="h-5 w-5 text-lucent-purple" />
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-white mb-1">Email</h4>
+                    <p className="text-gray-400">info@lucentai.com</p>
+                    <p className="text-gray-400">support@lucentai.com</p>
+                  </div>
+                </div>
+                
+                <div className="flex">
+                  <div className="mr-4">
+                    <div className="h-10 w-10 rounded-full bg-lucent-purple/20 flex items-center justify-center">
+                      <MapPin className="h-5 w-5 text-lucent-purple" />
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-white mb-1">Office Location</h4>
+                    <p className="text-gray-400">
+                      123 Trading Street, Financial District<br />
+                      New York, NY 10004, USA
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex">
+                  <div className="mr-4">
+                    <div className="h-10 w-10 rounded-full bg-lucent-purple/20 flex items-center justify-center">
+                      <Clock className="h-5 w-5 text-lucent-purple" />
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-white mb-1">Business Hours</h4>
+                    <p className="text-gray-400">
+                      Monday - Friday: 9:00 AM - 7:00 PM EST<br />
+                      Saturday - Sunday: Closed
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-gradient-to-r from-lucent-purple/20 to-lucent-blue/20 backdrop-blur-sm border border-white/10 rounded-xl p-8 shadow-lg">
+              <div className="flex items-start">
+                <div className="mr-4">
+                  <div className="h-10 w-10 rounded-full bg-lucent-purple/30 flex items-center justify-center">
+                    <MessageCircle className="h-5 w-5 text-white" />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-white text-lg mb-2">Live Chat Support</h4>
+                  <p className="text-gray-300 mb-4">
+                    Get immediate assistance from our AI trading specialists through our live chat service.
+                  </p>
+                  <Button className="btn-primary">
+                    Start Live Chat
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ContactSection;
