@@ -71,3 +71,22 @@ Yes it is!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+
+## Live Price Data & AI Analysis Requirements
+
+### Data Source: Alpha Vantage
+- **All price data and market analysis for EURUSD, XAUUSD, BTCUSD, and ETHUSD must be fetched live from the [Alpha Vantage API](https://www.alphavantage.co/).**
+- **API Key:** `BXTKALNMUIDY2O5G`
+- All components, widgets, or sections displaying price or analysis must connect to Alpha Vantage and update prices live.
+- Do not use hardcoded or static price data for these symbols.
+
+### AI Analysis Methodology
+- For each symbol (EURUSD, XAUUSD, BTCUSD, ETHUSD), perform AI-driven analysis using the Super Trend indicator.
+- Use Super Trend signals across multiple timeframes: 5 minutes, 15 minutes, 1 hour, 4 hours, and 1 day.
+- Assign weightage to each timeframe based on its trend impact (e.g., higher weight for longer timeframes).
+- Calculate a final probability of the market going up or down based on the weighted trends.
+- Only show the detailed AI analysis for these four symbols in the "AI-Driven Trading Interface" section.
+
+### Implementation Note
+- This requirement applies globally: **wherever price or analysis is shown, always use live data from Alpha Vantage as described above.**
+- If you add new price or analysis features in the future, follow this same approach.

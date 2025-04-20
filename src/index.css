@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,44 +8,44 @@
 
 @layer base {
   :root {
-    --background: 222 47% 11%;
+    --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
 
-    --card: 222 47% 11%;
+    --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222 47% 11%;
+    --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 252 94% 67%;
-    --primary-foreground: 222 47% 11%;
+    --primary: 265 89% 73%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 217 32% 17%;
+    --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217 32% 17%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 217 32% 17%;
+    --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 62% 30%;
+    --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217 32% 17%;
-    --input: 217 32% 17%;
-    --ring: 212 26% 83%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 265 89% 73%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 222 47% 11%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 252 94% 67%;
-    --sidebar-primary-foreground: 222 47% 11%;
-    --sidebar-accent: 217 32% 17%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 217 32% 17%;
-    --sidebar-ring: 212 26% 83%;
+    --sidebar-background: 222.2 82% 5.8%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 265 89% 73%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 217.2 32.6% 17.5%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 217.2 32.6% 17.5%;
+    --sidebar-ring: 265 89% 73%;
   }
 }
 
@@ -54,14 +56,23 @@
 
   body {
     @apply bg-lucent-navy text-foreground font-inter;
-    background-image: radial-gradient(rgba(139, 92, 246, 0.15) 2px, transparent 2px), 
-                      radial-gradient(rgba(59, 130, 246, 0.15) 2px, transparent 2px);
-    background-size: 50px 50px;
-    background-position: 0 0, 25px 25px;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-montserrat font-bold;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-lucent-deep-blue/50;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-lucent-purple/20 rounded-full hover:bg-lucent-purple/30 transition-colors;
   }
 }
 
@@ -71,19 +82,46 @@
   }
   
   .gradient-text {
-    @apply bg-gradient-primary bg-clip-text text-transparent inline-block;
+    @apply bg-gradient-primary bg-clip-text text-transparent;
   }
 
   .nav-link {
-    @apply relative px-4 py-2 text-sm font-medium text-white/80 hover:text-white transition-colors duration-200 after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-lucent-purple after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:transition-all hover:after:w-full;
+    @apply text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute left-0 right-0 bottom-0 h-0.5 bg-lucent-purple scale-x-0 transition-transform duration-300 ease-in-out;
+    transform-origin: bottom right;
+  }
+  
+  .nav-link:hover::after {
+    @apply scale-x-100;
+    transform-origin: bottom left;
+  }
+  
+  .nav-link.active {
+    @apply text-white;
+  }
+  
+  .nav-link.active::after {
+    @apply scale-x-100 bg-gradient-primary;
   }
 
   .btn-primary {
-    @apply bg-gradient-primary px-6 py-3 rounded-md text-white font-medium hover:shadow-lg hover:shadow-lucent-purple/20 transition-all duration-300;
+    @apply bg-gradient-primary text-white font-medium transition-all;
+  }
+  
+  .btn-primary:hover {
+    @apply shadow-glow-sm scale-105;
   }
 
   .btn-secondary {
-    @apply bg-transparent border border-lucent-purple/30 px-6 py-3 rounded-md text-white font-medium hover:bg-lucent-purple/10 transition-all duration-300;
+    @apply bg-transparent border border-lucent-purple/50 text-white font-medium transition-all;
+  }
+  
+  .btn-secondary:hover {
+    @apply border-lucent-purple bg-lucent-purple/10;
   }
 
   .feature-card {
@@ -94,6 +132,116 @@
     background-image: url('/grid-pattern.svg');
     background-repeat: repeat;
     background-size: 20px 20px;
+  }
+
+  .card {
+    @apply bg-gradient-card border border-white/5 rounded-xl p-6 backdrop-blur-sm transition-all hover:border-white/10 hover:shadow-glow-sm;
+  }
+  
+  .card-glass {
+    @apply bg-glass-card border border-white/10 rounded-xl backdrop-blur-md transition-all hover:border-white/20 hover:shadow-glass;
+  }
+
+  .status-success {
+    @apply text-lucent-success bg-lucent-success/10 border border-lucent-success/20 rounded-md px-2 py-0.5 text-xs font-medium;
+  }
+  
+  .status-warning {
+    @apply text-lucent-warning bg-lucent-warning/10 border border-lucent-warning/20 rounded-md px-2 py-0.5 text-xs font-medium;
+  }
+  
+  .status-error {
+    @apply text-lucent-error bg-lucent-error/10 border border-lucent-error/20 rounded-md px-2 py-0.5 text-xs font-medium;
+  }
+
+  .chart-container {
+    @apply bg-gradient-card rounded-xl border border-white/5 p-4 relative overflow-hidden;
+  }
+  
+  .chart-container::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-glow opacity-0 transition-opacity duration-500;
+  }
+  
+  .chart-container:hover::before {
+    @apply opacity-100;
+  }
+
+  .data-card {
+    @apply bg-gradient-card border border-white/5 rounded-lg p-4 transition-all hover:border-lucent-purple/20 hover:shadow-glow-sm;
+  }
+
+  .grid-pattern {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 30px 30px;
+    background-position: -19px -19px;
+  }
+  
+  .heading-1 {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold font-space;
+  }
+  
+  .heading-2 {
+    @apply text-3xl md:text-4xl font-bold font-space;
+  }
+  
+  .heading-3 {
+    @apply text-2xl md:text-3xl font-bold font-space;
+  }
+  
+  .mono {
+    @apply font-mono;
+  }
+  
+  .animate-float-large {
+    animation: floatLarge 10s ease-in-out infinite;
+  }
+  
+  .animate-float-small {
+    animation: floatSmall 8s ease-in-out infinite;
+  }
+  
+  .animate-spin-slow {
+    animation: spin 15s linear infinite;
+  }
+  
+  @keyframes floatLarge {
+    0%, 100% {
+      transform: translateY(0) translateX(0);
+    }
+    25% {
+      transform: translateY(-15px) translateX(15px);
+    }
+    50% {
+      transform: translateY(0) translateX(30px);
+    }
+    75% {
+      transform: translateY(15px) translateX(15px);
+    }
+  }
+  
+  @keyframes floatSmall {
+    0%, 100% {
+      transform: translateY(0) translateX(0);
+    }
+    25% {
+      transform: translateY(-10px) translateX(-10px);
+    }
+    50% {
+      transform: translateY(0) translateX(-20px);
+    }
+    75% {
+      transform: translateY(10px) translateX(-10px);
+    }
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 }
 
@@ -109,20 +257,15 @@
   animation-delay: 0.6s;
 }
 
-/* Enhance scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
+/* Blur backdrop filter support for browsers */
+@supports (backdrop-filter: blur(12px)) {
+  .bg-glass {
+    @apply bg-white/5 backdrop-blur-md;
+  }
 }
 
-::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(139, 92, 246, 0.5);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(139, 92, 246, 0.8);
+@supports not (backdrop-filter: blur(12px)) {
+  .bg-glass {
+    @apply bg-lucent-deep-blue/80;
+  }
 }

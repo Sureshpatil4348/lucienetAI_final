@@ -1,10 +1,8 @@
-
 import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import FeaturesOverview from "@/components/FeaturesOverview";
 import TradingInterface from "@/components/TradingInterface";
-import AboutUs from "@/components/AboutUs";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 
@@ -21,9 +19,9 @@ const Index = () => {
       <main className="flex-grow">
         <HeroSection />
         
-        <div className="py-20 container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-20">
-            <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className="py-12 container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-10">
+            <div className="text-center max-w-2xl mx-auto mb-10">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 AI-Driven <span className="gradient-text">Trading Interface</span>
               </h2>
@@ -36,8 +34,10 @@ const Index = () => {
         </div>
         
         <FeaturesOverview />
-        <AboutUs />
-        <ContactSection />
+        
+        <div className="pt-0 pb-10">
+          <ContactSection />
+        </div>
       </main>
       
       <Footer />

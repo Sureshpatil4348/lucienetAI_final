@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,8 +7,7 @@ import {
   PhoneCall, 
   Mail, 
   MapPin, 
-  Clock,
-  MessageCircle
+  Clock
 } from "lucide-react";
 
 const ContactSection = () => {
@@ -20,9 +18,9 @@ const ContactSection = () => {
   };
 
   return (
-    <div className="py-20 bg-lucent-navy relative">
+    <div className="py-14 bg-lucent-navy relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className="text-center max-w-2xl mx-auto mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Get in <span className="gradient-text">Touch</span>
           </h2>
@@ -31,8 +29,8 @@ const ContactSection = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 shadow-lg">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 shadow-lg h-full">
             <h3 className="text-2xl font-bold mb-6">Send Us a Message</h3>
             
             <form onSubmit={handleSubmit}>
@@ -101,8 +99,8 @@ const ContactSection = () => {
             </form>
           </div>
           
-          <div>
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 shadow-lg mb-8">
+          <div className="h-full">
+            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 shadow-lg h-full">
               <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
               
               <div className="space-y-6">
@@ -160,25 +158,6 @@ const ContactSection = () => {
                       Saturday - Sunday: Closed
                     </p>
                   </div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="bg-gradient-to-r from-lucent-purple/20 to-lucent-blue/20 backdrop-blur-sm border border-white/10 rounded-xl p-8 shadow-lg">
-              <div className="flex items-start">
-                <div className="mr-4">
-                  <div className="h-10 w-10 rounded-full bg-lucent-purple/30 flex items-center justify-center">
-                    <MessageCircle className="h-5 w-5 text-white" />
-                  </div>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-white text-lg mb-2">Live Chat Support</h4>
-                  <p className="text-gray-300 mb-4">
-                    Get immediate assistance from our AI trading specialists through our live chat service.
-                  </p>
-                  <Button className="btn-primary">
-                    Start Live Chat
-                  </Button>
                 </div>
               </div>
             </div>
