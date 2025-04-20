@@ -528,32 +528,98 @@ const AboutUs = () => {
             </motion.p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {aiCapabilities.map((capability, index) => (
-              <div key={index} className="relative group">
-                <div className={`absolute -inset-0.5 bg-gradient-to-r from-${capability.color}-500 to-${capability.color}-300 rounded-xl blur opacity-0 group-hover:opacity-20 transition duration-500`}></div>
-                <div className="bg-gradient-to-br from-gray-900 to-gray-950 border border-gray-800 rounded-xl p-6 relative">
-                  <div className="flex items-start">
-                    <div className={`p-3 rounded-lg bg-${capability.color}-500/10 text-${capability.color}-400 mr-5`}>
-                      {React.cloneElement(capability.icon as React.ReactElement, { className: "h-6 w-6" })}
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold mb-2">{capability.title}</h3>
-                      <p className="text-gray-400 mb-4">{capability.description}</p>
-                      
-                      <div className="flex items-center">
-                        <div className={`text-2xl font-bold text-${capability.color}-400 mr-3`}>
-                          {capability.stats.value}
-                        </div>
-                        <div className="text-sm text-gray-500">
-                          {capability.stats.label}
-                        </div>
-                      </div>
-                    </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            {/* SVM Technology */}
+            <motion.div
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="bg-gray-900/80 rounded-xl p-8 border border-gray-800 hover:border-purple-500/20 transition-all duration-300"
+            >
+              <div className="flex items-start space-x-6">
+                <div className="text-purple-500 p-2">
+                  <BrainCircuit className="h-10 w-10" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-white mb-2">SVM Technology</h3>
+                  <p className="text-gray-300 mb-4">Support Vector Machine algorithms for precision trading with adaptive market analysis</p>
+                  <div>
+                    <span className="text-4xl font-bold text-purple-500">98.7%</span>
+                    <span className="text-sm text-gray-500 ml-2">Accuracy</span>
                   </div>
                 </div>
               </div>
-            ))}
+            </motion.div>
+
+            {/* Auto Hedging */}
+            <motion.div
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="bg-gray-900/80 rounded-xl p-8 border border-gray-800 hover:border-blue-500/20 transition-all duration-300"
+            >
+              <div className="flex items-start space-x-6">
+                <div className="text-blue-500 p-2">
+                  <AreaChart className="h-10 w-10" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-white mb-2">Auto Hedging</h3>
+                  <p className="text-gray-300 mb-4">Intelligent automated hedging system to minimize risk in volatile market conditions</p>
+                  <div>
+                    <span className="text-4xl font-bold text-blue-500">27%</span>
+                    <span className="text-sm text-gray-500 ml-2">Return Rate</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Non-Martingale EA */}
+            <motion.div
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="bg-gray-900/80 rounded-xl p-8 border border-gray-800 hover:border-green-500/20 transition-all duration-300"
+            >
+              <div className="flex items-start space-x-6">
+                <div className="text-green-500 p-2">
+                  <TrendingUp className="h-10 w-10" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-white mb-2">Non-Martingale EA</h3>
+                  <p className="text-gray-300 mb-4">Advanced Expert Advisor system that avoids risky Martingale strategies</p>
+                  <div>
+                    <span className="text-4xl font-bold text-green-500">50ms</span>
+                    <span className="text-sm text-gray-500 ml-2">Response Time</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* In-Built Filters */}
+            <motion.div
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="bg-gray-900/80 rounded-xl p-8 border border-gray-800 hover:border-amber-500/20 transition-all duration-300"
+            >
+              <div className="flex items-start space-x-6">
+                <div className="text-amber-500 p-2">
+                  <Shield className="h-10 w-10" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-white mb-2">In-Built Filters</h3>
+                  <p className="text-gray-300 mb-4">Sophisticated market filters to identify optimal trading opportunities</p>
+                  <div>
+                    <span className="text-4xl font-bold text-amber-500">24/7</span>
+                    <span className="text-sm text-gray-500 ml-2">Monitoring</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </div>
           
           <div className="mt-16 p-8 bg-gradient-to-br from-gray-900 to-gray-950 border border-gray-800 rounded-2xl">
