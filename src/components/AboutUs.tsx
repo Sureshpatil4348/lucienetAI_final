@@ -90,6 +90,18 @@ const coreValues = [
   }
 ];
 
+// Trading dashboard visualization data for demo chart
+const tradingChartData = [
+  { time: '9:00', price: 152.4, volume: 30 },
+  { time: '10:00', price: 153.2, volume: 45 },
+  { time: '11:00', price: 154.8, volume: 80 },
+  { time: '12:00', price: 153.9, volume: 70 },
+  { time: '13:00', price: 154.3, volume: 50 },
+  { time: '14:00', price: 156.2, volume: 120 },
+  { time: '15:00', price: 155.7, volume: 90 },
+  { time: '16:00', price: 157.8, volume: 110 },
+];
+
 // AI capabilities data
 const aiCapabilities = [
   {
@@ -576,10 +588,77 @@ const AboutUs = () => {
                         <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                       </div>
                     </div>
-                    <div className="h-full w-full bg-gray-950 p-4 flex items-center justify-center">
-                      <div className="text-center">
-                        <Blocks className="h-16 w-16 text-lucent-purple/40 mx-auto mb-4" />
-                        <p className="text-gray-400">Trading visualization dashboard</p>
+                    <div className="h-full w-full bg-gray-950 p-4">
+                      {/* Trading Visualization Dashboard */}
+                      <div className="h-full flex flex-col">
+                        <div className="flex justify-between items-center mb-2">
+                          <h3 className="text-sm font-medium text-gray-300">BTC/USD Trading Analysis</h3>
+                          <div className="flex items-center space-x-3">
+                            <span className="text-xs text-green-500">+2.4%</span>
+                            <span className="text-xs text-gray-400">Last 24h</span>
+                          </div>
+                        </div>
+                        
+                        {/* Price Chart */}
+                        <div className="flex-1 relative">
+                          <div className="absolute inset-0 flex items-end space-x-1">
+                            {tradingChartData.map((data, index) => (
+                              <div key={index} className="flex-1 flex items-end h-full">
+                                <div 
+                                  className={`w-full ${index % 2 === 0 ? 'bg-lucent-purple/40' : 'bg-lucent-blue/40'} rounded-t`}
+                                  style={{ height: `${(data.price - 150) / 10 * 100}%` }}
+                                ></div>
+                              </div>
+                            ))}
+                          </div>
+                          
+                          {/* Price Lines */}
+                          <div className="absolute inset-0 flex flex-col justify-between pointer-events-none">
+                            {[...Array(5)].map((_, i) => (
+                              <div key={i} className="flex items-center w-full space-x-2">
+                                <div className="text-xs text-gray-500 w-10">{158 - i * 2}</div>
+                                <div className="h-px flex-1 bg-gray-800"></div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        {/* Volume Indicator */}
+                        <div className="h-8 mt-1">
+                          <div className="flex items-end h-full space-x-1">
+                            {tradingChartData.map((data, index) => (
+                              <div key={index} className="flex-1 flex items-end">
+                                <div 
+                                  className="w-full bg-lucent-purple/20 rounded-t"
+                                  style={{ height: `${data.volume / 120 * 100}%` }}
+                                ></div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        {/* Time Labels */}
+                        <div className="flex justify-between mt-1">
+                          {tradingChartData.map((data, index) => (
+                            <div key={index} className="text-xs text-gray-500">{data.time}</div>
+                          ))}
+                        </div>
+                        
+                        {/* Trading Signals */}
+                        <div className="flex justify-between mt-3 text-xs">
+                          <div className="flex items-center">
+                            <div className="h-2 w-2 rounded-full bg-green-500 mr-1"></div>
+                            <span className="text-gray-300">Buy Signal</span>
+                          </div>
+                          <div className="flex items-center">
+                            <div className="h-2 w-2 rounded-full bg-red-500 mr-1"></div>
+                            <span className="text-gray-300">Sell Signal</span>
+                          </div>
+                          <div className="flex items-center">
+                            <div className="h-2 w-2 rounded-full bg-yellow-500 mr-1"></div>
+                            <span className="text-gray-300">Hold</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
