@@ -563,11 +563,11 @@ const AboutUs = () => {
               <div className="flex items-start space-x-6">
                 <div className="text-blue-500 p-2">
                   <AreaChart className="h-10 w-10" />
-                </div>
+                    </div>
                 <div className="flex-1">
                   <h3 className="text-2xl font-bold text-white mb-2">Auto Hedging</h3>
                   <p className="text-gray-300 mb-4">Intelligent automated hedging system to minimize risk in volatile market conditions</p>
-                  <div>
+                    <div>
                     <span className="text-4xl font-bold text-blue-500">27%</span>
                     <span className="text-sm text-gray-500 ml-2">Return Rate</span>
                   </div>
@@ -586,16 +586,16 @@ const AboutUs = () => {
               <div className="flex items-start space-x-6">
                 <div className="text-green-500 p-2">
                   <TrendingUp className="h-10 w-10" />
-                </div>
+                        </div>
                 <div className="flex-1">
                   <h3 className="text-2xl font-bold text-white mb-2">Non-Martingale EA</h3>
                   <p className="text-gray-300 mb-4">Advanced Expert Advisor system that avoids risky Martingale strategies</p>
                   <div>
                     <span className="text-4xl font-bold text-green-500">50ms</span>
                     <span className="text-sm text-gray-500 ml-2">Response Time</span>
-                  </div>
-                </div>
-              </div>
+                        </div>
+                      </div>
+                    </div>
             </motion.div>
 
             {/* In-Built Filters */}

@@ -12,8 +12,6 @@ import NotFound from "./pages/NotFound";
 import SidebarNavigation from "./components/SidebarNavigation";
 import { useState, useEffect } from "react";
 import AIAnalysisPage from './pages/ai-analysis';
-import { PriceProvider } from './contexts/PriceContext';
-import { PriceDisplay } from './components/PriceDisplay';
 
 const queryClient = new QueryClient();
 
@@ -56,25 +54,15 @@ const AnimatedRoutes = () => {
 };
 
 const App = () => (
-  <PriceProvider>
-    <div className="min-h-screen bg-background">
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <AnimatedRoutes />
-          </BrowserRouter>
-        </TooltipProvider>
-      </QueryClientProvider>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-4">
-        <PriceDisplay symbol="EURUSD" className="p-4 rounded-lg border bg-card" />
-        <PriceDisplay symbol="BTCUSD" className="p-4 rounded-lg border bg-card" />
-        <PriceDisplay symbol="ETHUSD" className="p-4 rounded-lg border bg-card" />
-        <PriceDisplay symbol="XAUUSD" className="p-4 rounded-lg border bg-card" />
-      </div>
-    </div>
-  </PriceProvider>
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <AnimatedRoutes />
+      </BrowserRouter>
+    </TooltipProvider>
+  </QueryClientProvider>
 );
 
 export default App;
