@@ -32,8 +32,8 @@ export const useCryptoPrice = (symbol: string) => {
 
     fetchData();
 
-    // Set up polling for real-time updates (every 60 seconds)
-    const intervalId = setInterval(fetchData, 60000);
+    // Set up polling for real-time updates (every 5 minutes)
+    const intervalId = setInterval(fetchData, 300000);
 
     return () => {
       isMounted = false;
@@ -75,8 +75,8 @@ export const useMultipleCryptoPrices = (symbols: string[]) => {
 
     fetchData();
 
-    // Set up polling for real-time updates (every 60 seconds)
-    const intervalId = setInterval(fetchData, 60000);
+    // Set up polling for real-time updates (every 5 minutes)
+    const intervalId = setInterval(fetchData, 300000);
 
     return () => {
       isMounted = false;
@@ -118,8 +118,8 @@ export const useForexPrices = () => {
 
     fetchData();
 
-    // Set up polling for real-time updates (every 60 seconds)
-    const intervalId = setInterval(fetchData, 60000);
+    // Set up polling for real-time updates (every 5 minutes)
+    const intervalId = setInterval(fetchData, 300000);
 
     return () => {
       isMounted = false;

@@ -12,6 +12,7 @@ import NotFound from "./pages/NotFound";
 import SidebarNavigation from "./components/SidebarNavigation";
 import { useState, useEffect } from "react";
 import AIAnalysisPage from './pages/ai-analysis';
+import { MarketDataProvider } from "./context/MarketDataContext";
 
 const queryClient = new QueryClient();
 
@@ -40,7 +41,11 @@ const AnimatedRoutes = () => {
       <main className={showSidebar ? "ml-[280px] transition-all duration-300" : ""}>
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
-            <Route path="/" element={<Index />} />
+            <Route path="/" element={
+              <MarketDataProvider>
+                <Index />
+              </MarketDataProvider>
+            } />
             <Route path="/technology" element={<TechnologyPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />

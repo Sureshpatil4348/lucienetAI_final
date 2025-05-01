@@ -214,7 +214,7 @@ const AIAnalysisPage: React.FC = () => {
     };
 
     fetchAllData();
-    const interval = setInterval(fetchAllData, 60000); // Update every minute
+    const interval = setInterval(fetchAllData, 300000); // Update every 5 minutes
     return () => clearInterval(interval);
   }, [selectedTimeFrame]);
 

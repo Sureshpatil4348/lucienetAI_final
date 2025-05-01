@@ -77,7 +77,7 @@ const SidebarNavigation = ({ className }: SidebarNavProps) => {
   const formatPrice = (price: number, symbol: string) => {
     return new Intl.NumberFormat('en-US', {
       minimumFractionDigits: 2,
-      maximumFractionDigits: symbol === 'BTC' ? 2 : 2
+      maximumFractionDigits: 2
     }).format(price);
   };
 
