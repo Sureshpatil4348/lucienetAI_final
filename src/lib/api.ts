@@ -6,7 +6,9 @@ const API_KEYS = [
   '57153fefee6740088c76070a8b2fac9f', // rananjaysingh20@gmail.com
   '6690a346e27545d08731e40fdcd10020', // deepanshimarch30@gmail.com
   'b34b5a31b2444c9e8eb7d82bb511cf49', // deepanshimarch3003@gmail.com
-  'ae3aed4b67d0438792cadf1618339266'  // deepanshimarch3003@gmail.com
+  'ae3aed4b67d0438792cadf1618339266', // deepanshimarch3003@gmail.com
+  '6677bb70508f48bfb4a552f26d5c943a', // sureshpatil123@gmail.com
+  'a07ac23f23424c9badaa3bf201bd4b4e' // admin@webgigs.in
 ];
 
 const BASE_URL = 'https://api.twelvedata.com/price';
