@@ -16,7 +16,7 @@ import {
   ChevronUp,
   Activity
 } from "lucide-react";
-import { useMultipleCryptoPrices, useForexPrices } from "@/hooks/useCryptoPrice";
+import { useMarketData } from "@/context/MarketDataContext";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
@@ -39,9 +39,35 @@ interface Trade {
 interface TimeframeAnalysis {
   timeframe: string;
   trend: "uptrend" | "downtrend" | "sideways";
-  probability: number;
   signal: "buy" | "sell" | "neutral";
 }
+
+// Add timeframe weightages constant after the TimeframeAnalysis interface
+const TIMEFRAME_WEIGHTAGES: Record<string, number> = {
+  "5min": 5,
+  "15min": 10,
+  "30min": 10,
+  "1hour": 20,
+  "4hour": 25,
+  "1day": 30
+};
+
+// Add success probability calculation function after TIMEFRAME_WEIGHTAGES
+const calculateSuccessProbability = (analyses: TimeframeAnalysis[]): number => {
+  let uptrendWeight = 0;
+  let downtrendWeight = 0;
+
+  analyses.forEach(analysis => {
+    const weight = TIMEFRAME_WEIGHTAGES[analysis.timeframe] || 0;
+    if (analysis.trend === "uptrend") {
+      uptrendWeight += weight;
+    } else if (analysis.trend === "downtrend") {
+      downtrendWeight += weight;
+    }
+  });
+
+  return Math.max(uptrendWeight, downtrendWeight);
+};
 
 // Function to generate timeframe analysis for a trading pair
 const generateTimeframeAnalysis = (pair: string): TimeframeAnalysis[] => {
@@ -49,27 +75,16 @@ const generateTimeframeAnalysis = (pair: string): TimeframeAnalysis[] => {
   const trends = ["uptrend", "downtrend", "sideways"] as const;
   const signals = ["buy", "sell", "neutral"] as const;
   
-  return timeframes.map(timeframe => {
+  const analyses = timeframes.map(timeframe => {
     // Generate random trend, but with some consistency
     const trendSeed = (pair.charCodeAt(0) + timeframe.length) % 3;
     const trend = trends[trendSeed];
     
-    // Probability based on pair and timeframe
-    let baseProbability = 65 + (pair.length * 2);
-    
-    // Higher probabilities for longer timeframes typically
-    if (timeframe === "4hour" || timeframe === "1day") {
-      baseProbability += 10;
-    }
-    
-    // Add some randomness
-    const probability = Math.min(99, Math.max(60, baseProbability + Math.floor(Math.random() * 15)));
-    
-    // Signal based on trend and probability
+    // Signal based on trend
     let signal: "buy" | "sell" | "neutral";
-    if (trend === "uptrend" && probability > 75) {
+    if (trend === "uptrend") {
       signal = "buy";
-    } else if (trend === "downtrend" && probability > 75) {
+    } else if (trend === "downtrend") {
       signal = "sell";
     } else {
       signal = "neutral";
@@ -78,10 +93,11 @@ const generateTimeframeAnalysis = (pair: string): TimeframeAnalysis[] => {
     return {
       timeframe,
       trend,
-      probability,
       signal
     };
   });
+
+  return analyses;
 };
 
 const generateTrade = (
@@ -197,8 +213,8 @@ const generateTrade = (
     id,
     pair,
     type,
-    entry: parseFloat(entry.toFixed(category === "crypto" && !pair.includes("XRP") ? 2 : 4)),
-    current: parseFloat(current.toFixed(category === "crypto" && !pair.includes("XRP") ? 2 : 4)),
+    entry: parseFloat(entry.toFixed(2)),
+    current: parseFloat(current.toFixed(2)),
     profit: parseFloat(profit.toFixed(2)),
     time,
     probability,
@@ -214,11 +230,8 @@ const TradingInterface = () => {
   const [selectedCategory, setSelectedCategory] = useState<"all" | "crypto" | "forex">("all");
   const [timeframeAnalyses, setTimeframeAnalyses] = useState<Record<string, TimeframeAnalysis[]>>({});
   
-  // Fetch real-time crypto prices
-  const { data: cryptoPrices, isLoading: cryptoLoading } = useMultipleCryptoPrices(['BTC', 'ETH', 'XRP', 'SOL']);
-  const { data: forexPrices, isLoading: forexLoading } = useForexPrices();
-  
-  const isLoading = cryptoLoading || forexLoading;
+  // Use the market data context instead of direct API calls
+  const { cryptoPrices, forexPrices, isLoading, error } = useMarketData();
 
   // Define pairs
   const cryptoPairs = ["BTC/USD", "ETH/USD", "XRP/USD", "SOL/USD"];
@@ -259,28 +272,66 @@ const TradingInterface = () => {
     }
   }, [isLoading]);
 
-  // Function to get the overall trend status
+  // Update the getOverallTrend function to use weightage for trend determination
   const getOverallTrend = (pair: string): { status: string; color: string } => {
     if (!timeframeAnalyses[pair]) return { status: "Loading", color: "text-gray-400" };
     
     const analyses = timeframeAnalyses[pair];
-    const uptrendCount = analyses.filter(a => a.trend === "uptrend").length;
-    const downtrendCount = analyses.filter(a => a.trend === "downtrend").length;
-    const sidewaysCount = analyses.filter(a => a.trend === "sideways").length;
+    const successProbability = calculateSuccessProbability(analyses);
     
-    if (uptrendCount > analyses.length / 2) {
-      return { status: "Strong Uptrend", color: "text-green-500" };
-    } else if (downtrendCount > analyses.length / 2) {
-      return { status: "Strong Downtrend", color: "text-red-500" };
-    } else if (sidewaysCount > analyses.length / 2) {
-      return { status: "Sideways", color: "text-yellow-500" };
-    } else if (uptrendCount > downtrendCount) {
-      return { status: "Weak Uptrend", color: "text-green-400" };
-    } else if (downtrendCount > uptrendCount) {
-      return { status: "Weak Downtrend", color: "text-red-400" };
+    // Calculate weightages for uptrend and downtrend
+    let uptrendWeight = 0;
+    let downtrendWeight = 0;
+    
+    analyses.forEach(analysis => {
+      const weight = TIMEFRAME_WEIGHTAGES[analysis.timeframe] || 0;
+      if (analysis.trend === "uptrend") {
+        uptrendWeight += weight;
+      } else if (analysis.trend === "downtrend") {
+        downtrendWeight += weight;
+      }
+    });
+    
+    // Determine base trend based on higher weightage
+    let baseTrend: string;
+    if (uptrendWeight > downtrendWeight) {
+      baseTrend = "Uptrend";
+    } else if (downtrendWeight > uptrendWeight) {
+      baseTrend = "Downtrend";
     } else {
-      return { status: "Mixed", color: "text-gray-400" };
+      baseTrend = "Sideways";
     }
+    
+    // Add strength based on success probability
+    let strength: string;
+    if (successProbability > 80) {
+      strength = "Strong";
+    } else if (successProbability <= 50) {
+      strength = "Weak";
+    } else {
+      strength = ""; // Empty string for normal strength
+    }
+    
+    // Combine trend and strength (only add strength if it's not empty)
+    const status = strength ? `${strength} ${baseTrend}` : baseTrend;
+    
+    // Determine color based on trend and strength
+    let color: string;
+    if (baseTrend === "Uptrend") {
+      color = successProbability > 80 ? "text-green-500" : 
+              successProbability > 50 ? "text-green-400" : 
+              "text-green-300";
+    } else if (baseTrend === "Downtrend") {
+      color = successProbability > 80 ? "text-red-500" : 
+              successProbability > 50 ? "text-red-400" : 
+              "text-red-300";
+    } else {
+      color = successProbability > 80 ? "text-yellow-500" : 
+              successProbability > 50 ? "text-yellow-400" : 
+              "text-yellow-300";
+    }
+    
+    return { status, color };
   };
 
   // Function to get price, change and other details for a pair
@@ -288,57 +339,57 @@ const TradingInterface = () => {
     if (pair.includes("BTC") && cryptoPrices?.BTC) {
       return {
         price: cryptoPrices.BTC.price,
-        change: cryptoPrices.BTC.percentChange,
+        percentChange: cryptoPrices.BTC.percentChange,
         marketCap: "$922.4B",
         volume: "$28.7B"
       };
     } else if (pair.includes("ETH") && cryptoPrices?.ETH) {
       return {
         price: cryptoPrices.ETH.price,
-        change: cryptoPrices.ETH.percentChange,
+        percentChange: cryptoPrices.ETH.percentChange,
         marketCap: "$395.8B",
         volume: "$14.3B"
       };
     } else if (pair.includes("XRP") && cryptoPrices?.XRP) {
       return {
         price: cryptoPrices.XRP.price,
-        change: cryptoPrices.XRP.percentChange,
+        percentChange: cryptoPrices.XRP.percentChange,
         marketCap: "$31.2B",
         volume: "$1.8B"
       };
     } else if (pair.includes("SOL") && cryptoPrices?.SOL) {
       return {
         price: cryptoPrices.SOL.price,
-        change: cryptoPrices.SOL.percentChange,
+        percentChange: cryptoPrices.SOL.percentChange,
         marketCap: "$57.8B",
         volume: "$3.4B"
       };
     } else if (pair.includes("EUR/USD") && forexPrices?.["EUR/USD"]) {
       return {
         price: forexPrices["EUR/USD"].price,
-        change: forexPrices["EUR/USD"].percentChange
+        percentChange: forexPrices["EUR/USD"].percentChange
       };
     } else if (pair.includes("GBP/USD") && forexPrices?.["GBP/USD"]) {
       return {
         price: forexPrices["GBP/USD"].price,
-        change: forexPrices["GBP/USD"].percentChange
+        percentChange: forexPrices["GBP/USD"].percentChange
       };
     } else if (pair.includes("USD/JPY") && forexPrices?.["USD/JPY"]) {
       return {
         price: forexPrices["USD/JPY"].price,
-        change: forexPrices["USD/JPY"].percentChange
+        percentChange: forexPrices["USD/JPY"].percentChange
       };
-    } else if (pair.includes("XAU/USD")) {
+    } else if (pair.includes("XAU/USD") && forexPrices?.["XAU/USD"]) {
       return {
-        price: 2341.50,
-        change: 0.32
+        price: forexPrices["XAU/USD"].price,
+        percentChange: forexPrices["XAU/USD"].percentChange
       };
     }
     
     // Default fallback values
     return {
       price: pair.includes("/") ? 1.0000 : 100.00,
-      change: 0.00
+      percentChange: 0.00
     };
   };
 
@@ -416,6 +467,8 @@ const TradingInterface = () => {
             const details = getPairDetails(pair);
             const overallTrend = getOverallTrend(pair);
             const isSelected = selectedPair === pair;
+            const analyses = timeframeAnalyses[pair] || [];
+            const successProbability = calculateSuccessProbability(analyses);
             
             return (
               <div 
@@ -439,13 +492,11 @@ const TradingInterface = () => {
                     <div className="text-white font-medium">
                       {pair.includes("XAU") ? "$" : pair.includes("/") ? "" : "$"}
                       {typeof details.price === 'number' ? 
-                        (pair.includes("XRP") ? details.price.toFixed(4) : 
-                        pair.includes("/") ? details.price.toFixed(4) : 
-                        details.price.toLocaleString(undefined, {maximumFractionDigits: 2})) : 'N/A'}
+                        details.price.toFixed(2) : 'N/A'}
                     </div>
-                    <div className={`text-xs flex items-center justify-end ${details.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-                      {details.change >= 0 ? '+' : ''}{typeof details.change === 'number' ? details.change.toFixed(2) : 0}%
-                      {details.change >= 0 ? 
+                    <div className={`text-xs flex items-center justify-end ${details.percentChange >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                      {details.percentChange >= 0 ? '+' : ''}{typeof details.percentChange === 'number' ? details.percentChange.toFixed(2) : 0}%
+                      {details.percentChange >= 0 ? 
                         <ArrowUpRight className="h-3 w-3 ml-1" /> : 
                         <ArrowDownRight className="h-3 w-3 ml-1" />
                       }
@@ -453,27 +504,22 @@ const TradingInterface = () => {
                   </div>
                 </div>
                 
-                {/* Success probability */}
+                {/* Update Success probability section */}
                 <div className="mt-3 mb-1">
                   <div className="flex justify-between text-xs mb-1">
                     <span className="text-gray-400">Success Probability</span>
                     <span className="text-white">
-                      {Math.floor(Math.random() * 15) + 80}%
+                      {successProbability}%
                     </span>
                   </div>
                   <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
                     <div 
                       className={`h-1.5 rounded-full ${
-                        pair.includes('BTC') ? 'bg-orange-500' : 
-                        pair.includes('ETH') ? 'bg-indigo-500' : 
-                        pair.includes('XRP') ? 'bg-blue-500' : 
-                        pair.includes('SOL') ? 'bg-purple-500' :
-                        pair.includes('EUR') ? 'bg-cyan-500' :
-                        pair.includes('GBP') ? 'bg-emerald-500' :
-                        pair.includes('XAU') ? 'bg-yellow-500' :
+                        successProbability > 80 ? 'bg-green-500' :
+                        successProbability > 50 ? 'bg-yellow-500' :
                         'bg-red-500'
                       }`}
-                      style={{ width: `${Math.floor(Math.random() * 15) + 80}%` }}
+                      style={{ width: `${successProbability}%` }}
                     ></div>
                   </div>
                 </div>
@@ -506,7 +552,6 @@ const TradingInterface = () => {
                     <th className="pb-2 text-gray-400 font-medium">Timeframe</th>
                     <th className="pb-2 text-gray-400 font-medium">Trend</th>
                     <th className="pb-2 text-gray-400 font-medium">Signal</th>
-                    <th className="pb-2 text-gray-400 font-medium text-right">Success Probability</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -546,21 +591,6 @@ const TradingInterface = () => {
                             {analysis.signal.toUpperCase()}
                           </Badge>
                         </td>
-                        <td className="py-3 text-right">
-                          <div className="flex items-center justify-end">
-                            <div className="w-32 bg-white/10 rounded-full h-1.5 mr-2">
-                              <div
-                                className={`h-1.5 rounded-full ${
-                                  analysis.probability > 85 ? 'bg-green-500' :
-                                  analysis.probability > 75 ? 'bg-yellow-500' :
-                                  'bg-orange-500'
-                                }`}
-                                style={{ width: `${analysis.probability}%` }}
-                              ></div>
-                            </div>
-                            <span className="text-white">{analysis.probability}%</span>
-                          </div>
-                        </td>
                       </tr>
                     ))
                   ) : (
@@ -574,12 +604,6 @@ const TradingInterface = () => {
                         </td>
                         <td className="py-3">
                           <div className="h-6 bg-white/10 rounded w-16 animate-pulse"></div>
-                        </td>
-                        <td className="py-3 text-right">
-                          <div className="flex items-center justify-end">
-                            <div className="w-32 bg-white/10 rounded h-2 mr-2"></div>
-                            <div className="h-4 bg-white/10 rounded w-8 animate-pulse"></div>
-                          </div>
                         </td>
                       </tr>
                     ))

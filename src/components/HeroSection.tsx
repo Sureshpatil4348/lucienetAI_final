@@ -15,7 +15,7 @@ import {
   AlertCircle,
   CheckCircle
 } from "lucide-react";
-import { useMultipleCryptoPrices } from "@/hooks/useCryptoPrice";
+import { useMarketData } from "@/context/MarketDataContext";
 import { cn, formatCryptoPrice, formatPercent } from "@/lib/utils";
 
 // Animated background particles
@@ -157,7 +157,7 @@ const TiltContainer = ({ children }: { children: React.ReactNode }) => {
 
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const { data: cryptoData, isLoading } = useMultipleCryptoPrices(['BTC', 'ETH']);
+  const { cryptoPrices, isLoading } = useMarketData();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -168,7 +168,7 @@ const HeroSection = () => {
   }, []);
 
   // Get Bitcoin data with fallback values
-  const btcData = cryptoData?.BTC || {
+  const btcData = cryptoPrices['BTC'] || {
     price: 48632.75,
     percentChange: 2.34,
     lastUpdated: new Date().toISOString(),
@@ -176,7 +176,7 @@ const HeroSection = () => {
   };
 
   // Get Ethereum data with fallback values
-  const ethData = cryptoData?.ETH || {
+  const ethData = cryptoPrices['ETH'] || {
     price: 3295.84,
     percentChange: 1.87,
     lastUpdated: new Date().toISOString(),

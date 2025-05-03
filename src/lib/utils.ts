@@ -58,14 +58,7 @@ export function formatPercent(value: number, options?: {
 
 // Format cryptocurrency values appropriately
 export function formatCryptoPrice(value: number, symbol: string) {
-  // Different precision for different coins
-  const precision = {
-    'BTC': 2,
-    'ETH': 2,
-    'XRP': 4,
-  }[symbol] || 2;
-
-  return formatNumber(value, { minimumFractionDigits: precision, maximumFractionDigits: precision });
+  return formatNumber(value, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 // Convert date to relative time (e.g., "2 hours ago")
