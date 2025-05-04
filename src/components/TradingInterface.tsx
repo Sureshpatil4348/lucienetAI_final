@@ -336,6 +336,10 @@ const TradingInterface = () => {
 
   // Function to get price, change and other details for a pair
   const getPairDetails = (pair: string) => {
+    if (isLoading) {
+      return null;
+    }
+
     if (pair.includes("BTC") && cryptoPrices?.BTC) {
       return {
         price: cryptoPrices.BTC.price,
@@ -386,11 +390,7 @@ const TradingInterface = () => {
       };
     }
     
-    // Default fallback values
-    return {
-      price: pair.includes("/") ? 1.0000 : 100.00,
-      percentChange: 0.00
-    };
+    return null;
   };
 
   // Function to get appropriate color for trend
@@ -414,7 +414,7 @@ const TradingInterface = () => {
   };
 
   return (
-    <div className="bg-lucent-deep-blue border border-white/10 rounded-xl overflow-hidden shadow-xl">
+    <div id="trading-interface" className="bg-lucent-deep-blue border border-white/10 rounded-xl overflow-hidden shadow-xl">
       {/* Header */}
       <div className="bg-gradient-to-r from-lucent-deep-blue to-lucent-navy p-4 border-b border-white/10 flex justify-between items-center">
         <div className="flex items-center">
@@ -489,38 +489,54 @@ const TradingInterface = () => {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-white font-medium">
-                      {pair.includes("XAU") ? "$" : pair.includes("/") ? "" : "$"}
-                      {typeof details.price === 'number' ? 
-                        details.price.toFixed(2) : 'N/A'}
-                    </div>
-                    <div className={`text-xs flex items-center justify-end ${details.percentChange >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-                      {details.percentChange >= 0 ? '+' : ''}{typeof details.percentChange === 'number' ? details.percentChange.toFixed(2) : 0}%
-                      {details.percentChange >= 0 ? 
-                        <ArrowUpRight className="h-3 w-3 ml-1" /> : 
-                        <ArrowDownRight className="h-3 w-3 ml-1" />
-                      }
-                    </div>
+                    {isLoading || !details ? (
+                      <>
+                        <div className="h-6 bg-white/10 rounded w-24 animate-pulse mb-1"></div>
+                        <div className="h-4 bg-white/10 rounded w-16 animate-pulse"></div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="text-white font-medium">
+                          {pair.includes("XAU") ? "$" : pair.includes("/") ? "" : "$"}
+                          {details.price.toFixed(2)}
+                        </div>
+                        <div className={`text-xs flex items-center justify-end ${details.percentChange >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                          {details.percentChange >= 0 ? '+' : ''}{details.percentChange.toFixed(2)}%
+                          {details.percentChange >= 0 ? 
+                            <ArrowUpRight className="h-3 w-3 ml-1" /> : 
+                            <ArrowDownRight className="h-3 w-3 ml-1" />
+                          }
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
                 
-                {/* Update Success probability section */}
+                {/* Success probability section */}
                 <div className="mt-3 mb-1">
                   <div className="flex justify-between text-xs mb-1">
                     <span className="text-gray-400">Success Probability</span>
-                    <span className="text-white">
-                      {successProbability}%
-                    </span>
+                    {isLoading ? (
+                      <div className="h-4 bg-white/10 rounded w-12 animate-pulse"></div>
+                    ) : (
+                      <span className="text-white">
+                        {successProbability}%
+                      </span>
+                    )}
                   </div>
                   <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
-                    <div 
-                      className={`h-1.5 rounded-full ${
-                        successProbability > 80 ? 'bg-green-500' :
-                        successProbability > 50 ? 'bg-yellow-500' :
-                        'bg-red-500'
-                      }`}
-                      style={{ width: `${successProbability}%` }}
-                    ></div>
+                    {isLoading ? (
+                      <div className="h-1.5 bg-white/10 rounded-full animate-pulse"></div>
+                    ) : (
+                      <div 
+                        className={`h-1.5 rounded-full ${
+                          successProbability > 80 ? 'bg-green-500' :
+                          successProbability > 50 ? 'bg-yellow-500' :
+                          'bg-red-500'
+                        }`}
+                        style={{ width: `${successProbability}%` }}
+                      ></div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -549,18 +565,18 @@ const TradingInterface = () => {
               <table className="w-full border-collapse">
                 <thead>
                   <tr className="text-left border-b border-white/10">
-                    <th className="pb-2 text-gray-400 font-medium">Timeframe</th>
-                    <th className="pb-2 text-gray-400 font-medium">Trend</th>
-                    <th className="pb-2 text-gray-400 font-medium">Signal</th>
+                    <th className="pb-2 text-gray-400 font-medium text-left">Timeframe</th>
+                    <th className="pb-2 text-gray-400 font-medium text-center">Trend</th>
+                    <th className="pb-2 text-gray-400 font-medium text-right">Signal</th>
                   </tr>
                 </thead>
                 <tbody>
                   {analysisComplete && timeframeAnalyses[selectedPair] ? (
                     timeframeAnalyses[selectedPair].map((analysis, index) => (
                       <tr key={index} className="border-b border-white/5 hover:bg-white/5">
-                        <td className="py-3 text-white">{analysis.timeframe}</td>
-                        <td className="py-3">
-                          <span className={`${getTrendColor(analysis.trend)} flex items-center`}>
+                        <td className="py-3 text-white text-left">{analysis.timeframe}</td>
+                        <td className="py-3 text-center">
+                          <span className={`${getTrendColor(analysis.trend)} flex items-center justify-center`}>
                             {analysis.trend === "uptrend" ? (
                               <>
                                 <ArrowUpRight className="h-4 w-4 mr-1" />
@@ -579,7 +595,7 @@ const TradingInterface = () => {
                             )}
                           </span>
                         </td>
-                        <td className="py-3">
+                        <td className="py-3 text-right">
                           <Badge
                             variant="outline"
                             className={`
@@ -596,146 +612,20 @@ const TradingInterface = () => {
                   ) : (
                     Array.from({ length: 6 }).map((_, index) => (
                       <tr key={index} className="border-b border-white/5">
-                        <td className="py-3">
+                        <td className="py-3 text-left">
                           <div className="h-4 bg-white/10 rounded w-16 animate-pulse"></div>
                         </td>
-                        <td className="py-3">
-                          <div className="h-4 bg-white/10 rounded w-24 animate-pulse"></div>
+                        <td className="py-3 text-center">
+                          <div className="h-4 bg-white/10 rounded w-24 animate-pulse mx-auto"></div>
                         </td>
-                        <td className="py-3">
-                          <div className="h-6 bg-white/10 rounded w-16 animate-pulse"></div>
+                        <td className="py-3 text-right">
+                          <div className="h-6 bg-white/10 rounded w-16 animate-pulse ml-auto"></div>
                         </td>
                       </tr>
                     ))
                   )}
                 </tbody>
               </table>
-            </div>
-            
-            {/* Market insights for selected pair */}
-            <div className="mt-6">
-              <h5 className="text-white font-medium mb-3 flex items-center">
-                <Activity size={16} className="mr-2 text-purple-400" />
-                Key Insights for {selectedPair}
-              </h5>
-              
-              {analysisComplete ? (
-                <div className="space-y-3">
-                  {selectedPair.includes("BTC") && (
-                    <>
-                      <div className="flex space-x-2 text-sm">
-                        <div className="flex-shrink-0 h-5 w-5 rounded-full bg-green-500/20 flex items-center justify-center">
-                          <TrendingUp className="h-3 w-3 text-green-500" />
-                        </div>
-                        <p className="text-gray-300">
-                          Strong institutional inflows continue to support price above $48,000
-                        </p>
-                      </div>
-                      <div className="flex space-x-2 text-sm">
-                        <div className="flex-shrink-0 h-5 w-5 rounded-full bg-yellow-500/20 flex items-center justify-center">
-                          <AlertCircle className="h-3 w-3 text-yellow-500" />
-                        </div>
-                        <p className="text-gray-300">
-                          Watch key resistance at $50,000 for potential breakout
-                        </p>
-                      </div>
-                    </>
-                  )}
-                  
-                  {selectedPair.includes("ETH") && (
-                    <>
-                      <div className="flex space-x-2 text-sm">
-                        <div className="flex-shrink-0 h-5 w-5 rounded-full bg-green-500/20 flex items-center justify-center">
-                          <CheckCircle className="h-3 w-3 text-green-500" />
-                        </div>
-                        <p className="text-gray-300">
-                          Network activity increasing ahead of upcoming protocol upgrade
-                        </p>
-                      </div>
-                      <div className="flex space-x-2 text-sm">
-                        <div className="flex-shrink-0 h-5 w-5 rounded-full bg-green-500/20 flex items-center justify-center">
-                          <TrendingUp className="h-3 w-3 text-green-500" />
-                        </div>
-                        <p className="text-gray-300">
-                          ETH staking rate continues to climb, reducing available supply
-                        </p>
-                      </div>
-                    </>
-                  )}
-                  
-                  {selectedPair.includes("XRP") && (
-                    <div className="flex space-x-2 text-sm">
-                      <div className="flex-shrink-0 h-5 w-5 rounded-full bg-green-500/20 flex items-center justify-center">
-                        <CheckCircle className="h-3 w-3 text-green-500" />
-                      </div>
-                      <p className="text-gray-300">
-                        XRP showing breakout potential as legal clarity improves
-                      </p>
-                    </div>
-                  )}
-                  
-                  {selectedPair.includes("SOL") && (
-                    <div className="flex space-x-2 text-sm">
-                      <div className="flex-shrink-0 h-5 w-5 rounded-full bg-green-500/20 flex items-center justify-center">
-                        <TrendingUp className="h-3 w-3 text-green-500" />
-                      </div>
-                      <p className="text-gray-300">
-                        SOL ecosystem expansion driving increased adoption and demand
-                      </p>
-                    </div>
-                  )}
-                  
-                  {selectedPair.includes("EUR/USD") && (
-                    <div className="flex space-x-2 text-sm">
-                      <div className="flex-shrink-0 h-5 w-5 rounded-full bg-yellow-500/20 flex items-center justify-center">
-                        <AlertCircle className="h-3 w-3 text-yellow-500" />
-                      </div>
-                      <p className="text-gray-300">
-                        EUR/USD showing mixed signals ahead of ECB policy announcement
-                      </p>
-                    </div>
-                  )}
-                  
-                  {selectedPair.includes("GBP/USD") && (
-                    <div className="flex space-x-2 text-sm">
-                      <div className="flex-shrink-0 h-5 w-5 rounded-full bg-green-500/20 flex items-center justify-center">
-                        <CheckCircle className="h-3 w-3 text-green-500" />
-                      </div>
-                      <p className="text-gray-300">
-                        GBP gaining strength on positive economic data from UK
-                      </p>
-                    </div>
-                  )}
-                  
-                  {selectedPair.includes("USD/JPY") && (
-                    <div className="flex space-x-2 text-sm">
-                      <div className="flex-shrink-0 h-5 w-5 rounded-full bg-yellow-500/20 flex items-center justify-center">
-                        <AlertCircle className="h-3 w-3 text-yellow-500" />
-                      </div>
-                      <p className="text-gray-300">
-                        USD/JPY approaching key resistance level at 157.50
-                      </p>
-                    </div>
-                  )}
-                  
-                  {selectedPair.includes("XAU/USD") && (
-                    <div className="flex space-x-2 text-sm">
-                      <div className="flex-shrink-0 h-5 w-5 rounded-full bg-green-500/20 flex items-center justify-center">
-                        <TrendingUp className="h-3 w-3 text-green-500" />
-                      </div>
-                      <p className="text-gray-300">
-                        Gold continuing uptrend amid global economic uncertainty
-                      </p>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <div className="animate-pulse space-y-3">
-                  <div className="h-4 bg-white/10 rounded w-full"></div>
-                  <div className="h-4 bg-white/10 rounded w-5/6"></div>
-                  <div className="h-4 bg-white/10 rounded w-4/5"></div>
-                </div>
-              )}
             </div>
           </div>
         )}

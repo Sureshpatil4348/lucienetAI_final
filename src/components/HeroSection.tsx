@@ -157,7 +157,14 @@ const TiltContainer = ({ children }: { children: React.ReactNode }) => {
 
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const { cryptoPrices, isLoading } = useMarketData();
+  const { cryptoPrices, forexPrices, isLoading, getSignalInfo } = useMarketData();
+
+  const scrollToTradingInterface = () => {
+    const tradingInterface = document.getElementById('trading-interface');
+    if (tradingInterface) {
+      tradingInterface.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -171,17 +178,49 @@ const HeroSection = () => {
   const btcData = cryptoPrices['BTC'] || {
     price: 48632.75,
     percentChange: 2.34,
-    lastUpdated: new Date().toISOString(),
-    successProbability: 92
+    lastUpdated: new Date().toISOString()
   };
 
   // Get Ethereum data with fallback values
   const ethData = cryptoPrices['ETH'] || {
     price: 3295.84,
     percentChange: 1.87,
-    lastUpdated: new Date().toISOString(),
-    successProbability: 87
+    lastUpdated: new Date().toISOString()
   };
+
+  // Get signal info for BTC and ETH
+  const btcSignal = getSignalInfo('BTC/USD');
+  const ethSignal = getSignalInfo('ETH/USD');
+
+  // Calculate overall market trend
+  const calculateMarketTrend = () => {
+    const allPairs = [
+      ...Object.keys(cryptoPrices).map(symbol => `${symbol}/USD`),
+      ...Object.keys(forexPrices)
+    ];
+
+    let uptrendCount = 0;
+    let downtrendCount = 0;
+
+    allPairs.forEach(pair => {
+      const signal = getSignalInfo(pair);
+      if (signal.status.toLowerCase().includes('uptrend')) {
+        uptrendCount++;
+      } else if (signal.status.toLowerCase().includes('downtrend')) {
+        downtrendCount++;
+      }
+    });
+
+    if (uptrendCount > downtrendCount) {
+      return { trend: 'Bullish', color: 'text-green-400' };
+    } else if (downtrendCount > uptrendCount) {
+      return { trend: 'Bearish', color: 'text-red-400' };
+    } else {
+      return { trend: 'Sideways', color: 'text-yellow-400' };
+    }
+  };
+
+  const marketTrend = calculateMarketTrend();
 
   // Animation variants
   const sectionVariants = {
@@ -435,13 +474,17 @@ const HeroSection = () => {
                       <div>
                         <div className="flex justify-between items-center mb-1">
                           <span className="text-sm text-gray-400">Success Probability</span>
-                          <span className="text-white font-medium">{btcData.successProbability || 75}%</span>
+                          <span className="text-white font-medium">{btcSignal.successProbability}%</span>
                         </div>
                         <div className="h-2 bg-white/10 rounded-full overflow-hidden">
                           <motion.div 
-                            className="h-2 rounded-full bg-blue-500"
+                            className={`h-2 rounded-full ${
+                              btcSignal.successProbability > 80 ? 'bg-green-500' :
+                              btcSignal.successProbability > 50 ? 'bg-yellow-500' :
+                              'bg-red-500'
+                            }`}
                             initial={{ width: 0 }}
-                            animate={{ width: `${btcData.successProbability || 75}%` }}
+                            animate={{ width: `${btcSignal.successProbability}%` }}
                             transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
                           />
                         </div>
@@ -450,8 +493,8 @@ const HeroSection = () => {
                       {/* BTC AI Analysis */}
                       <div className="flex justify-between items-center mt-3 text-xs">
                         <div className="flex items-center">
-                          <CheckCircle size={14} className="text-green-400 mr-1.5" />
-                          <span className="text-green-400">Strong Buy Signal</span>
+                          <CheckCircle size={14} className={`${btcSignal.color} mr-1.5`} />
+                          <span className={btcSignal.color}>{btcSignal.status}</span>
                         </div>
                         <div className="flex items-center gap-1 text-gray-400">
                           <Clock size={12} />
@@ -549,13 +592,17 @@ const HeroSection = () => {
                       <div>
                         <div className="flex justify-between items-center mb-1">
                           <span className="text-sm text-gray-400">Success Probability</span>
-                          <span className="text-white font-medium">{ethData.successProbability || 94}%</span>
+                          <span className="text-white font-medium">{ethSignal.successProbability}%</span>
                         </div>
                         <div className="h-2 bg-white/10 rounded-full overflow-hidden">
                           <motion.div 
-                            className="h-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-500"
+                            className={`h-2 rounded-full ${
+                              ethSignal.successProbability > 80 ? 'bg-green-500' :
+                              ethSignal.successProbability > 50 ? 'bg-yellow-500' :
+                              'bg-red-500'
+                            }`}
                             initial={{ width: 0 }}
-                            animate={{ width: `${ethData.successProbability || 94}%` }}
+                            animate={{ width: `${ethSignal.successProbability}%` }}
                             transition={{ duration: 1, delay: 0.7, ease: "easeOut" }}
                           />
                         </div>
@@ -564,8 +611,8 @@ const HeroSection = () => {
                       {/* ETH AI Analysis */}
                       <div className="flex justify-between items-center mt-3 text-xs">
                         <div className="flex items-center">
-                          <CheckCircle size={14} className="text-green-400 mr-1.5" />
-                          <span className="text-green-400">Moderate Buy Signal</span>
+                          <CheckCircle size={14} className={`${ethSignal.color} mr-1.5`} />
+                          <span className={ethSignal.color}>{ethSignal.status}</span>
                         </div>
                         <div className="flex items-center gap-1 text-gray-400">
                           <Clock size={12} />
@@ -577,11 +624,14 @@ const HeroSection = () => {
                     {/* Overall Market Summary */}
                     <div className="bg-white/5 border border-white/10 rounded-lg p-3 flex justify-between items-center">
                       <div className="flex items-center">
-                        <TrendingUp size={16} className="text-green-400 mr-2" />
-                        <span className="text-sm text-white">Market Trend: <span className="text-green-400 font-medium">Bullish</span></span>
+                        <TrendingUp size={16} className={`${marketTrend.color} mr-2`} />
+                        <span className="text-sm text-white">Market Trend: <span className={`${marketTrend.color} font-medium`}>{marketTrend.trend}</span></span>
                       </div>
                       <motion.button
-                        className="text-xs py-1 px-3 bg-purple-500/20 text-purple-300 rounded"
+                        onClick={scrollToTradingInterface}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="text-xs py-1 px-3 bg-purple-500/20 text-purple-300 rounded hover:bg-purple-500/30 transition-colors"
                       >
                         View Full Analysis
                       </motion.button>

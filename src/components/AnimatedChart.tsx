@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 
-// Static performance data
+// Static performance data with compound returns starting from $1M
 const performanceData = [
-  { month: "January", sp: 2.12, eurekahedge: -0.64, lucient: 3.23 },
-  { month: "February", sp: 4.84, eurekahedge: 0.0039, lucient: 7.37 },
-  { month: "March", sp: 3.06, eurekahedge: -0.86, lucient: 4.66 },
-  { month: "April", sp: -4.23, eurekahedge: 0.0009, lucient: -6.44 },
-  { month: "May", sp: 4.94, eurekahedge: 0.001, lucient: 7.52 },
-  { month: "June", sp: 3.08, eurekahedge: 0.0015, lucient: 4.69 },
-  { month: "July", sp: 0.94, eurekahedge: -1.24, lucient: 1.43 },
-  { month: "August", sp: 2, eurekahedge: 0.033, lucient: 3.05 },
-  { month: "September", sp: 2.46, eurekahedge: 0.0039, lucient: 3.75 },
-  { month: "October", sp: -0.91, eurekahedge: -0.95, lucient: -1.39 },
-  { month: "November", sp: 5.4, eurekahedge: 0.0078, lucient: 8.22 },
-  { month: "December", sp: -2.62, eurekahedge: 1.56, lucient: -3.99 }
+  { month: "January", sp: 1012000, eurekahedge: 1006400, lucient: 1032300 },
+  { month: "February", sp: 1061000, eurekahedge: 1006404, lucient: 1108400 },
+  { month: "March", sp: 1093500, eurekahedge: 997700, lucient: 1160100 },
+  { month: "April", sp: 1047300, eurekahedge: 997709, lucient: 1085400 },
+  { month: "May", sp: 1099000, eurekahedge: 997719, lucient: 1167000 },
+  { month: "June", sp: 1132800, eurekahedge: 997734, lucient: 1221700 },
+  { month: "July", sp: 1143500, eurekahedge: 985400, lucient: 1239500 },
+  { month: "August", sp: 1166400, eurekahedge: 985733, lucient: 1277700 },
+  { month: "September", sp: 1195100, eurekahedge: 985772, lucient: 1325600 },
+  { month: "October", sp: 1184200, eurekahedge: 976400, lucient: 1307200 },
+  { month: "November", sp: 1248200, eurekahedge: 976476, lucient: 1414700 },
+  { month: "December", sp: 1215500, eurekahedge: 991700, lucient: 1358300 }
 ];
 
 interface AnimatedChartProps {
@@ -45,9 +45,9 @@ const AnimatedChart: React.FC<AnimatedChartProps> = ({
       return (
         <div className="bg-lucent-deep-blue p-3 border border-white/10 rounded-md shadow-lg">
           <p className="text-white font-medium">{`Month: ${payload[0].payload.month}`}</p>
-          <p className="text-gray-400 text-sm">{`S&P: ${payload[0].payload.sp}%`}</p>
-          <p className="text-gray-400 text-sm">{`Eurekahedge: ${payload[0].payload.eurekahedge}%`}</p>
-          <p className="text-gray-400 text-sm">{`Lucient: ${payload[0].payload.lucient}%`}</p>
+          <p className="text-gray-400 text-sm">{`S&P: $${payload[0].payload.sp.toLocaleString()}`}</p>
+          <p className="text-gray-400 text-sm">{`Eurekahedge: $${payload[0].payload.eurekahedge.toLocaleString()}`}</p>
+          <p className="text-gray-400 text-sm">{`Lucient: $${payload[0].payload.lucient.toLocaleString()}`}</p>
         </div>
       );
     }
@@ -83,9 +83,8 @@ const AnimatedChart: React.FC<AnimatedChartProps> = ({
             tick={{ fill: '#94A3B8' }} 
             axisLine={{ stroke: '#334155' }}
             tickLine={{ stroke: '#334155' }}
-            domain={['dataMin - 1', 'dataMax + 1']}
-            tickFormatter={(value) => `${value.toFixed(1)}%`}
-            ticks={[-8, -7.5, -7, -6.5, -6, -5.5, -5, -4.5, -4, -3.5, -3, -2.5, -2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9]}
+            domain={['dataMin - 10000', 'dataMax + 10000']}
+            tickFormatter={(value) => `$${(value / 1000000).toFixed(1)}M`}
             padding={{ top: 10, bottom: 10 }}
           />
           <Tooltip content={<CustomTooltip />} />
