@@ -45,9 +45,9 @@ const AnimatedChart: React.FC<AnimatedChartProps> = ({
       return (
         <div className="bg-lucent-deep-blue p-3 border border-white/10 rounded-md shadow-lg">
           <p className="text-white font-medium">{`Month: ${payload[0].payload.month}`}</p>
+          <p className="text-gray-400 text-sm">{`Lucient: $${payload[0].payload.lucient.toLocaleString()}`}</p>
           <p className="text-gray-400 text-sm">{`S&P: $${payload[0].payload.sp.toLocaleString()}`}</p>
           <p className="text-gray-400 text-sm">{`Eurekahedge: $${payload[0].payload.eurekahedge.toLocaleString()}`}</p>
-          <p className="text-gray-400 text-sm">{`Lucient: $${payload[0].payload.lucient.toLocaleString()}`}</p>
         </div>
       );
     }

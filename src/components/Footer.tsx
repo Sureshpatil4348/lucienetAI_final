@@ -11,49 +11,36 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="bg-lucent-deep-blue border-t border-white/10 mt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <footer className="bg-[#0A0A0A] text-white py-12">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-4">
-              LUCENT<span className="text-white">AI</span>
-            </h3>
-            <p className="text-gray-400 mb-4">
-              Advanced AI-driven trading algorithms that consistently outperform industry benchmarks.
+            <h3 className="text-lg font-semibold mb-4">Lucent AI Horizon</h3>
+            <p className="text-gray-400">
+              Empowering traders with cutting-edge AI technology for smarter market decisions.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-lucent-purple transition-colors">
-                <Github size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-lucent-purple transition-colors">
-                <Twitter size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-lucent-purple transition-colors">
-                <Linkedin size={20} />
-              </a>
-            </div>
           </div>
           
           <div>
-            <h4 className="text-white font-semibold mb-4">Quick Links</h4>
+            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="text-gray-400 hover:text-lucent-purple transition-colors">
+                <Link to="/" className="text-gray-400 hover:text-white transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/technology" className="text-gray-400 hover:text-lucent-purple transition-colors">
+                <Link to="/technology" className="text-gray-400 hover:text-white transition-colors">
                   Technology
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="text-gray-400 hover:text-lucent-purple transition-colors">
-                  About Us
+                <Link to="/about" className="text-gray-400 hover:text-white transition-colors">
+                  About
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-gray-400 hover:text-lucent-purple transition-colors">
+                <Link to="/contact" className="text-gray-400 hover:text-white transition-colors">
                   Contact
                 </Link>
               </li>
@@ -61,57 +48,38 @@ const Footer = () => {
           </div>
           
           <div>
-            <h4 className="text-white font-semibold mb-4">Legal</h4>
+            <h3 className="text-lg font-semibold mb-4">Legal</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/privacy" className="text-gray-400 hover:text-lucent-purple transition-colors">
+                <Link to="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link to="/terms" className="text-gray-400 hover:text-lucent-purple transition-colors">
+                <Link to="/terms-of-service" className="text-gray-400 hover:text-white transition-colors">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link to="/disclaimer" className="text-gray-400 hover:text-lucent-purple transition-colors">
-                  Trading Disclaimer
-                </Link>
-              </li>
-              <li>
-                <Link to="/cookies" className="text-gray-400 hover:text-lucent-purple transition-colors">
-                  Cookie Policy
+                <Link to="/refund-policy" className="text-gray-400 hover:text-white transition-colors">
+                  Refund Policy
                 </Link>
               </li>
             </ul>
           </div>
           
           <div>
-            <h4 className="text-white font-semibold mb-4">Contact Us</h4>
-            <ul className="space-y-2">
-              <li className="flex items-center text-gray-400">
-                <MapPin size={16} className="mr-2 text-lucent-purple" />
-                <span>123 Trading St, Financial District</span>
-              </li>
-              <li className="flex items-center text-gray-400">
-                <Phone size={16} className="mr-2 text-lucent-purple" />
-                <span>+1 (555) 123-4567</span>
-              </li>
-              <li className="flex items-center text-gray-400">
-                <Mail size={16} className="mr-2 text-lucent-purple" />
-                <span>info@lucentai.com</span>
-              </li>
+            <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
+            <ul className="space-y-2 text-gray-400">
+              <li>Email: support@lucentaihorizon.com</li>
+              <li>Phone: +1 (555) 123-4567</li>
+              <li>Address: 123 Trading Street, Financial District, NY 10004</li>
             </ul>
           </div>
         </div>
         
-        <div className="border-t border-white/10 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} Lucent AI. All rights reserved.
-          </p>
-          <p className="text-gray-400 text-sm mt-2 md:mt-0">
-            Trading involves risk. Past performance is not indicative of future results.
-          </p>
+        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+          <p>&copy; {new Date().getFullYear()} Lucent AI Horizon. All rights reserved.</p>
         </div>
       </div>
     </footer>
