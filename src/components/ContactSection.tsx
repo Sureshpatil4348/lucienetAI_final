@@ -27,7 +27,7 @@ const ContactSection = () => {
           <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 shadow-lg h-full">
             <h3 className="text-2xl font-bold mb-6">Send Us a Message</h3>
             
-            <form action="https://formsubmit.co/suresh.patil@botmudra.com" method="POST">
+            <form action="https://formsubmit.co/acb6eeb54698427dc97fbc32b61f91d7" method="POST">
               {/* Honeypot to prevent spam */}
               <input type="text" name="_honey" style={{ display: 'none' }} />
               

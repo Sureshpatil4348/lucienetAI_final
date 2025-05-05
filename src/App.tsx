@@ -13,6 +13,9 @@ import SidebarNavigation from "./components/SidebarNavigation";
 import { useState, useEffect } from "react";
 import AIAnalysisPage from './pages/ai-analysis';
 import { MarketDataProvider } from "./context/MarketDataContext";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import TermsOfServicePage from "./pages/TermsOfServicePage";
+import RefundPolicyPage from "./pages/RefundPolicyPage";
 
 const queryClient = new QueryClient();
 
@@ -50,6 +53,9 @@ const AnimatedRoutes = () => {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/ai-analysis" element={<AIAnalysisPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="/terms-of-service" element={<TermsOfServicePage />} />
+            <Route path="/refund-policy" element={<RefundPolicyPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>
