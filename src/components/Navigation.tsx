@@ -16,8 +16,8 @@ const Navigation = () => {
     <nav className="bg-white shadow-lg">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          <Link href="/" className="text-xl font-bold text-gray-800">
-            Lucent AI Horizon
+          <Link href="/" className="text-white font-bold text-2xl">
+            Pinaxa Labs
           </Link>
           
           <div className="hidden md:flex space-x-8">

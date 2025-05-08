@@ -344,7 +344,7 @@ const AboutUs = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              Lucent AI specializes in cutting-edge auto trading algorithms designed exclusively for financial markets. Our mission is to democratize sophisticated trading technology.
+              Pinaxa Labs specializes in cutting-edge auto trading algorithms designed exclusively for financial markets. Our mission is to democratize sophisticated trading technology.
             </motion.p>
             
             <motion.div
@@ -627,7 +627,7 @@ const AboutUs = () => {
               <div className="md:w-1/2 mb-8 md:mb-0 md:pr-8">
                 <h3 className="text-2xl font-bold mb-4">Highly Evolved System</h3>
                 <p className="text-gray-300 mb-6 leading-relaxed">
-                  At Lucent AI, we've fine-tuned our automated trading system through rigorous testing and continuous improvement. Our dedication to innovation shines through as we enhance our system with cutting-edge Machine Learning technology. Our algorithms are designed to not just perform but to outshine, delivering outstanding results in the dynamic world of financial markets.
+                  At Pinaxa Labs, we've fine-tuned our automated trading system through rigorous testing and continuous improvement. Our dedication to innovation shines through as we enhance our system with cutting-edge Machine Learning technology. Our algorithms are designed to not just perform but to outshine, delivering outstanding results in the dynamic world of financial markets.
                 </p>
                 <div className="space-y-3">
                   <div className="flex items-start">

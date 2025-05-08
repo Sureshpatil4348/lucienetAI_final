@@ -35,7 +35,7 @@ const ContactSection = () => {
               <input type="hidden" name="_captcha" value="false" />
               
               {/* Specify redirect after submission */}
-              <input type="hidden" name="_next" value="https://lucentai.com/thank-you" />
+              <input type="hidden" name="_next" value="https://pinaxalabs.com/thank-you" />
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                 <div>

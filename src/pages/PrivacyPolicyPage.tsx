@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 
 const PrivacyPolicyPage = () => {
   useEffect(() => {
-    document.title = "Privacy Policy | Lucent AI Horizon";
+    document.title = "Privacy Policy | Pinaxa Labs";
   }, []);
 
   return (
