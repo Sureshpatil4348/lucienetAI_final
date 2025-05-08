@@ -371,9 +371,9 @@ const AboutUs = () => {
       <section className="py-20 relative">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16">
-            <StatsCounter value="98.7%" label="Trading Accuracy" />
+            <StatsCounter value="0.5ms" label="Latency" />
             <StatsCounter value="50ms" label="Processing Speed" />
-            <StatsCounter value="3+ Years" label="Market Experience" />
+            <StatsCounter value="9+ Years" label="Market Experience" />
             <StatsCounter value="24/7" label="System Availability" />
           </div>
         </div>
@@ -742,36 +742,38 @@ const AboutUs = () => {
       </section>
 
       {/* Team Section */}
-      <section id="team" className="py-20 relative">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <motion.h2
-              variants={itemVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="text-3xl md:text-4xl font-bold mb-4"
-            >
-              Meet Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-lucent-purple to-lucent-blue">Team</span>
-            </motion.h2>
-            <motion.p
-              variants={itemVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="text-gray-300 text-lg"
-            >
-              A diverse founding team of experts in finance, technology, and operations
-            </motion.p>
+      {false && (
+        <section id="team" className="py-20 relative">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <motion.h2
+                variants={itemVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="text-3xl md:text-4xl font-bold mb-4"
+              >
+                Meet Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-lucent-purple to-lucent-blue">Team</span>
+              </motion.h2>
+              <motion.p
+                variants={itemVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="text-gray-300 text-lg"
+              >
+                A diverse founding team of experts in finance, technology, and operations
+              </motion.p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {teamMembers.map((member, index) => (
+                <TeamMemberCard key={index} member={member} index={index} />
+              ))}
+            </div>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {teamMembers.map((member, index) => (
-              <TeamMemberCard key={index} member={member} index={index} />
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* CTA Section */}
       <section className="py-20 relative">

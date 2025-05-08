@@ -124,8 +124,8 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <h4 className="font-medium text-white mb-1">Phone</h4>
-                    <p className="text-gray-400">+1 (555) 123-4567</p>
-                    <p className="text-gray-400">+1 (555) 987-6543</p>
+                    <p className="text-gray-400">+91 6361156726</p>
+                    <p className="text-gray-400">+91 8722741058</p>
                   </div>
                 </div>
                 
@@ -137,8 +137,8 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <h4 className="font-medium text-white mb-1">Email</h4>
-                    <p className="text-gray-400">info@lucentai.com</p>
-                    <p className="text-gray-400">support@lucentai.com</p>
+                    <p className="text-gray-400">info@Pinaxalabs.com</p>
+                    <p className="text-gray-400">support@pinaxalabs.com</p>
                   </div>
                 </div>
                 
@@ -151,8 +151,7 @@ const ContactSection = () => {
                   <div>
                     <h4 className="font-medium text-white mb-1">Office Location</h4>
                     <p className="text-gray-400">
-                      123 Trading Street, Financial District<br />
-                      New York, NY 10004, USA
+                    253, SMT Rukkavva Junnur, Mudhol - 587313 Karnataka, India
                     </p>
                   </div>
                 </div>

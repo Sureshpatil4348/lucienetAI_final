@@ -304,8 +304,8 @@ const HeroSection = () => {
                     <BarChart2 className="h-5 w-5 text-lucent-purple" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-white">98.7%</h3>
-                    <p className="text-sm text-gray-400">Accuracy Rate</p>
+                    <h3 className="font-semibold text-white">99.9%</h3>
+                    <p className="text-sm text-gray-400">Server Uptime</p>
                   </div>
                 </div>
               </motion.div>
