@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -7,10 +7,33 @@ import {
   PhoneCall, 
   Mail, 
   MapPin, 
-  Clock
+  Clock,
+  CheckCircle2
 } from "lucide-react";
 
 const ContactSection = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch('https://formsubmit.co/acb6eeb54698427dc97fbc32b61f91d7', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        form.reset();
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  };
+
   return (
     <div className="py-14 bg-lucent-navy relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -25,90 +48,103 @@ const ContactSection = () => {
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 shadow-lg h-full">
-            <h3 className="text-2xl font-bold mb-6">Send Us a Message</h3>
-            
-            <form action="https://formsubmit.co/acb6eeb54698427dc97fbc32b61f91d7" method="POST">
-              {/* Honeypot to prevent spam */}
-              <input type="text" name="_honey" style={{ display: 'none' }} />
-              
-              {/* Disable Captcha */}
-              <input type="hidden" name="_captcha" value="false" />
-              
-              {/* Specify redirect after submission */}
-              <input type="hidden" name="_next" value="https://pinaxalabs.com/thank-you" />
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-                <div>
-                  <label htmlFor="name" className="block text-white mb-2">
-                    Full Name
-                  </label>
-                  <Input
-                    id="name"
-                    name="name"
-                    placeholder="Your full name"
-                    className="bg-white/5 border border-white/10 focus:border-lucent-purple"
-                    required
-                  />
+            {isSubmitted ? (
+              <div className="text-center py-8">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-500/20 mb-4">
+                  <CheckCircle2 className="h-8 w-8 text-green-500" />
                 </div>
-                
-                <div>
-                  <label htmlFor="email" className="block text-white mb-2">
-                    Email Address
-                  </label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    placeholder="Your email address"
-                    className="bg-white/5 border border-white/10 focus:border-lucent-purple"
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="phone" className="block text-white mb-2">
-                    Phone Number
-                  </label>
-                  <Input
-                    id="phone"
-                    name="phone"
-                    placeholder="Your phone number"
-                    className="bg-white/5 border border-white/10 focus:border-lucent-purple"
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="subject" className="block text-white mb-2">
-                    Subject
-                  </label>
-                  <Input
-                    id="subject"
-                    name="subject"
-                    placeholder="How can we help?"
-                    className="bg-white/5 border border-white/10 focus:border-lucent-purple"
-                    required
-                  />
-                </div>
+                <h3 className="text-2xl font-bold mb-2">Thank You!</h3>
+                <p className="text-gray-300 mb-6">
+                  Your message has been sent successfully. We'll get back to you shortly.
+                </p>
+                <Button 
+                  onClick={() => setIsSubmitted(false)}
+                  className="bg-lucent-purple hover:bg-lucent-purple/90 text-white font-medium py-2 px-4"
+                >
+                  Send Another Message
+                </Button>
               </div>
-              
-              <div className="mb-6">
-                <label htmlFor="message" className="block text-white mb-2">
-                  Message
-                </label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  rows={5}
-                  placeholder="Please provide details about your inquiry..."
-                  className="bg-white/5 border border-white/10 focus:border-lucent-purple resize-none"
-                  required
-                />
-              </div>
-              
-              <Button type="submit" className="btn-primary w-full sm:w-auto">
-                Send Message <Send className="ml-2 h-4 w-4" />
-              </Button>
-            </form>
+            ) : (
+              <form onSubmit={handleSubmit}>
+                {/* Honeypot to prevent spam */}
+                <input type="text" name="_honey" style={{ display: 'none' }} />
+                
+                {/* Disable Captcha */}
+                <input type="hidden" name="_captcha" value="false" />
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                  <div>
+                    <label htmlFor="name" className="block text-white mb-2">
+                      Full Name
+                    </label>
+                    <Input
+                      id="name"
+                      name="name"
+                      placeholder="Your full name"
+                      className="bg-white/5 border border-white/10 focus:border-lucent-purple"
+                      required
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="email" className="block text-white mb-2">
+                      Email Address
+                    </label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      placeholder="Your email address"
+                      className="bg-white/5 border border-white/10 focus:border-lucent-purple"
+                      required
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="phone" className="block text-white mb-2">
+                      Phone Number
+                    </label>
+                    <Input
+                      id="phone"
+                      name="phone"
+                      placeholder="Your phone number"
+                      className="bg-white/5 border border-white/10 focus:border-lucent-purple"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="subject" className="block text-white mb-2">
+                      Subject
+                    </label>
+                    <Input
+                      id="subject"
+                      name="subject"
+                      placeholder="How can we help?"
+                      className="bg-white/5 border border-white/10 focus:border-lucent-purple"
+                      required
+                    />
+                  </div>
+                </div>
+                
+                <div className="mb-6">
+                  <label htmlFor="message" className="block text-white mb-2">
+                    Message
+                  </label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    rows={5}
+                    placeholder="Please provide details about your inquiry..."
+                    className="bg-white/5 border border-white/10 focus:border-lucent-purple resize-none"
+                    required
+                  />
+                </div>
+                
+                <Button type="submit" className="btn-primary w-full sm:w-auto">
+                  Send Message <Send className="ml-2 h-4 w-4" />
+                </Button>
+              </form>
+            )}
           </div>
           
           <div className="h-full">

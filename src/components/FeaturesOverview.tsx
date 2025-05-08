@@ -120,7 +120,10 @@ const FeaturesOverview = () => {
               </li>
             </ul>
             
-            <Button className="bg-lucent-purple hover:bg-lucent-purple/90 text-white font-medium py-2 px-4">
+            <Button 
+              className="bg-lucent-purple hover:bg-lucent-purple/90 text-white font-medium py-2 px-4"
+              onClick={() => window.location.href = '/technology'}
+            >
               Explore Advanced Features <ChevronRight className="ml-1 h-4 w-4" />
             </Button>
           </div>
@@ -700,7 +703,10 @@ const FeaturesOverview = () => {
                 </div>
               </div>
               
-              <Button className="bg-gradient-to-r from-lucent-purple to-lucent-blue text-white font-medium py-3 px-6">
+              <Button 
+                className="bg-gradient-to-r from-lucent-purple to-lucent-blue text-white font-medium py-3 px-6"
+                onClick={() => window.open('https://calendar.app.google/pyhYWqyu5gvsQVTg9', '_blank')}
+              >
                 Get Early Access <ArrowUpRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
@@ -768,10 +774,16 @@ const FeaturesOverview = () => {
               Join thousands of traders who have already enhanced their trading performance with Pinaxa Labs' cutting-edge technology.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button className="bg-lucent-purple hover:bg-lucent-purple/90 text-white font-medium py-2 px-4">
+              <Button 
+                className="bg-lucent-purple hover:bg-lucent-purple/90 text-white font-medium py-2 px-4"
+                onClick={() => window.open('https://calendar.app.google/pyhYWqyu5gvsQVTg9', '_blank')}
+              >
                 Get Started Now
               </Button>
-              <Button className="bg-transparent border border-white/20 hover:bg-white/5 text-white font-medium py-2 px-4">
+              <Button 
+                className="bg-transparent border border-white/20 hover:bg-white/5 text-white font-medium py-2 px-4"
+                onClick={() => window.open('https://calendar.app.google/pyhYWqyu5gvsQVTg9', '_blank')}
+              >
                 Schedule a Demo
               </Button>
             </div>
