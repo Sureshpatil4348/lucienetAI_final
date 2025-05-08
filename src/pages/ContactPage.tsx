@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -6,7 +5,7 @@ import ContactSection from "@/components/ContactSection";
 
 const ContactPage = () => {
   useEffect(() => {
-    document.title = "Contact Us - Lucent AI";
+    document.title = "Contact Us - Pinaxa Labs";
   }, []);
 
   return (

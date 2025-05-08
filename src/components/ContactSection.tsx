@@ -19,7 +19,7 @@ const ContactSection = () => {
             Get in <span className="gradient-text">Touch</span>
           </h2>
           <p className="text-gray-300">
-            Our team of experts is ready to answer your questions and help you discover how Lucent AI can transform your trading.
+            Our team of experts is ready to answer your questions and help you discover how Pinaxa Labs can transform your trading.
           </p>
         </div>
         

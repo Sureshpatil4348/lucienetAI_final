@@ -2,7 +2,7 @@ import React from 'react';
 import AIAnalysisSection from '@/components/AIAnalysisSection';
 
 export const metadata = {
-  title: 'AI Analysis | Lucent AI Horizon',
+  title: 'AI Analysis | Pinaxa Labs',
   description: 'Real-time AI-driven market analysis using Super Trend indicators across multiple timeframes.',
 };
 

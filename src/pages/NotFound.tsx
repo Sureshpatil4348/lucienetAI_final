@@ -1,4 +1,3 @@
-
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
@@ -10,7 +9,7 @@ const NotFound = () => {
   const location = useLocation();
 
   useEffect(() => {
-    document.title = "Page Not Found - Lucent AI";
+    document.title = "Page Not Found - Pinaxa Labs";
     
     console.error(
       "404 Error: User attempted to access non-existent route:",

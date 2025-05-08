@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 
 const TermsOfServicePage = () => {
   useEffect(() => {
-    document.title = "Terms of Service | Lucent AI Horizon";
+    document.title = "Terms of Service | Pinaxa Labs";
   }, []);
 
   return (

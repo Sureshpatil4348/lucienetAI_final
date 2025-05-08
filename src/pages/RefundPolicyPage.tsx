@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 
 const RefundPolicyPage = () => {
   useEffect(() => {
-    document.title = "Refund Policy | Lucent AI Horizon";
+    document.title = "Refund Policy | Pinaxa Labs";
   }, []);
 
   return (
