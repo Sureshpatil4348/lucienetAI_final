@@ -282,7 +282,11 @@ const HeroSection = () => {
               variants={itemVariants}
               className="flex flex-wrap gap-4 mb-8"
             >
-              <Button size="lg" className="bg-gradient-primary hover:opacity-90 hover:shadow-glow-md transition-all">
+              <Button 
+                size="lg" 
+                className="bg-gradient-primary hover:opacity-90 hover:shadow-glow-md transition-all"
+                onClick={() => window.open('https://calendar.app.google/pyhYWqyu5gvsQVTg9', '_blank')}
+              >
                 Get Started Free <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button size="lg" variant="outline" className="border-white/20 hover:bg-white/5">

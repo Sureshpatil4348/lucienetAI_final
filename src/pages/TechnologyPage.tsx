@@ -147,6 +147,11 @@ const CubeAnimation = () => {
 };
 
 const TechnologyPage = () => {
+  const aiDecisionsRef = useRef<HTMLDivElement>(null);
+  const [currentSection, setCurrentSection] = useState("ai");
+  const controls = useAnimation();
+  const mainControls = useAnimation();
+  
   useEffect(() => {
     document.title = "Technology - Pinaxa Labs";
     
@@ -185,10 +190,6 @@ const TechnologyPage = () => {
     };
   }, []);
 
-  const [currentSection, setCurrentSection] = useState("ai");
-  const controls = useAnimation();
-  const mainControls = useAnimation();
-  
   const dataPoints = Array.from({ length: 50 }, () => Math.random() * 100);
   
   const pythonCode = `
@@ -302,7 +303,7 @@ class PinaxaModel:
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
                   viewport={{ once: true }}
-                  className="flex items-center mb-6"
+                  className="flex items-center mb-6 ai-decisions-section"
                 >
                   <div className="flex-shrink-0 mr-4 p-2 rounded-lg bg-lucent-purple/10">
                     <Brain className="h-7 w-7 text-lucent-purple" />
@@ -908,9 +909,9 @@ class PinaxaModel:
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {/* Hero Section with CSS 3D Animation */}
           <div className="relative mb-24">
-            <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,#000_20%,transparent_100%)]"></div>
+            <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,#000_20%,transparent_100%)] pointer-events-none"></div>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -931,13 +932,24 @@ class PinaxaModel:
                 </p>
                 
                 <div className="flex flex-wrap gap-4">
-                  <a 
-                    href="#explore" 
-                    className="inline-flex items-center py-3 px-6 bg-lucent-purple hover:bg-purple-600 text-white font-medium rounded-lg transition-all duration-200"
+                  <button 
+                    type="button"
+                    onClick={() => {
+                      setCurrentSection('ai');
+                      console.log('Button clicked');
+                      const section = document.querySelector('.ai-decisions-section');
+                      if (section) {
+                        console.log('Section found');
+                        section.scrollIntoView({ behavior: 'smooth' });
+                      } else {
+                        console.log('Section not found');
+                      }
+                    }}
+                    className="inline-flex items-center py-3 px-6 bg-lucent-purple hover:bg-purple-600 text-white font-medium rounded-lg transition-all duration-200 hover:cursor-pointer"
                   >
                     Explore Technology
                     <ArrowRight className="ml-2 h-4 w-4" />
-                  </a>
+                  </button>
                   
                   <a 
                     href="#technical" 
@@ -1025,7 +1037,9 @@ class PinaxaModel:
               Join thousands of traders who are leveraging our breakthrough technology to make smarter, data-driven decisions in the market.
             </p>
             <a 
-              href="#" 
+              href="https://calendly.com/pinaxalabs/30min" 
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center py-4 px-8 bg-lucent-purple hover:bg-purple-600 text-white font-medium rounded-lg shadow-lg shadow-lucent-purple/30 transition-all duration-200"
             >
               Get Started

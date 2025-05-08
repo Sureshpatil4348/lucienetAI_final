@@ -105,7 +105,7 @@ const Navbar = () => {
               transition={{ duration: 0.5 }}
               className="text-white font-bold text-2xl flex items-center"
             >
-              <span className="text-lucent-purple-light">PINAXA</span>
+              <span className="text-lucent-purple-light mr-2">PINAXA</span>
               <span className="relative">
                 LABS
                 <span className="absolute -top-1 -right-3 h-2 w-2 bg-lucent-purple rounded-full animate-pulse"></span>
@@ -152,7 +152,10 @@ const Navbar = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="ml-8"
             >
-              <Button className="bg-gradient-primary hover:shadow-glow-sm transition-all duration-300">
+              <Button 
+                className="bg-gradient-primary hover:shadow-glow-sm transition-all duration-300"
+                onClick={() => window.open('https://calendar.app.google/pyhYWqyu5gvsQVTg9', '_blank')}
+              >
                 <span>Get Started</span>
                 <span className="ml-1.5 rounded-full bg-white/20 p-0.5 flex items-center justify-center">
                   <ChevronDown size={14} className="text-white" />
@@ -220,6 +223,7 @@ const Navbar = () => {
             >
               <Button
                 className="w-full bg-gradient-primary"
+                onClick={() => window.open('https://calendar.app.google/pyhYWqyu5gvsQVTg9', '_blank')}
               >
                 Get Started
               </Button>

@@ -353,7 +353,7 @@ const AboutUs = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
             >
-              <a href="#features" className="px-8 py-3 rounded-lg bg-lucent-purple hover:bg-lucent-purple/90 text-white font-medium transition-all duration-300 flex items-center">
+              <a href="/technology" className="px-8 py-3 rounded-lg bg-lucent-purple hover:bg-lucent-purple/90 text-white font-medium transition-all duration-300 flex items-center">
                 Explore Our Technology
                 <ArrowRight className="ml-2 h-5 w-5" />
               </a>
@@ -797,7 +797,9 @@ const AboutUs = () => {
               Join thousands of traders who are leveraging our breakthrough AI technology to make smarter, data-driven decisions in the market.
             </p>
             <a 
-              href="#" 
+              href="https://calendly.com/pinaxalabs/30min" 
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center px-8 py-4 rounded-lg bg-gradient-to-r from-lucent-purple to-lucent-blue text-white font-medium text-lg shadow-lg hover:shadow-lucent-purple/20 transition-all duration-300"
             >
               Get Started Today
