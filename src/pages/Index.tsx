@@ -9,7 +9,7 @@ import Footer from "@/components/Footer";
 const Index = () => {
   useEffect(() => {
     // Set page title
-    document.title = "Lucent AI - Advanced AI-Driven Trading Solutions";
+    document.title = "Pinaxa Labs - Advanced AI-Driven Trading Solutions";
   }, []);
 
   return (
