@@ -71,15 +71,9 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
             <ul className="space-y-2 text-gray-400">
-<<<<<<< HEAD
-              <li>Email: support@pinaxalabs.com</li>
-              <li>Phone: +1 (555) 123-4567</li>
-              <li>Address: 123 Trading Street, Financial District, NY 10004</li>
-=======
               <li>Email: support@Pinaxalabs.com</li>
               <li>Phone: +91 6361156726</li>
               <li>Address: 253, SMT Rukkavva Junnur, Mudhol - 587313 Karnataka, India</li>
->>>>>>> 11f1535d022406ba58465d46294ce14408222ab1
             </ul>
           </div>
         </div>
