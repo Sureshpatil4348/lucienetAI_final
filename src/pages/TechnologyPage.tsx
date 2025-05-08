@@ -234,7 +234,7 @@ class LucentAIModel:
       stats: [
         { label: "Model Depth", value: "18 layers" },
         { label: "Training Data", value: "12TB+" },
-        { label: "Accuracy", value: "98.7%" }
+        { label: "Accuracy", value: "78.4%" }
       ],
       color: "purple"
     },
@@ -605,7 +605,7 @@ class LucentAIModel:
                 {[
                   { 
                     title: "Prediction Accuracy", 
-                    value: "98.7%", 
+                    value: "78.4%", 
                     subtitle: "Historical performance", 
                     color: "purple",
                     icon: <Zap className="h-5 w-5" />,
@@ -689,10 +689,10 @@ class LucentAIModel:
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {[
-                  { condition: "Bull Market", accuracy: 99.1, return: 31.2, confidence: 95.8, color: "green" },
-                  { condition: "Bear Market", accuracy: 97.8, return: 22.3, confidence: 91.2, color: "red" },
-                  { condition: "Sideways Market", accuracy: 98.5, return: 19.8, confidence: 93.5, color: "amber" },
-                  { condition: "High Volatility", accuracy: 97.2, return: 29.7, confidence: 89.6, color: "purple" },
+                  { condition: "Bull Market", accuracy: 70.1, return: 31.2, confidence: 95.8, color: "green" },
+                  { condition: "Bear Market", accuracy: 68.8, return: 22.3, confidence: 91.2, color: "red" },
+                  { condition: "Sideways Market", accuracy: 85.5, return: 19.8, confidence: 93.5, color: "amber" },
+                  { condition: "High Volatility", accuracy: 88.2, return: 29.7, confidence: 89.6, color: "purple" },
                 ].map((condition, idx) => (
                   <motion.div 
                     key={idx}
@@ -870,7 +870,7 @@ class LucentAIModel:
                   
                   <ul className="space-y-4">
                     {[
-                      "410% higher returns than the Eurekahedge FX Fund Index over the last 3 years",
+                      "12X higher returns than the Eurekahedge FX Fund Index over the last 1 year ",
                       "31 consecutive profitable months across both bull and bear markets",
                       "Zero negative months during major market downturns of 2022-2023",
                       "Profitable in 94% of trading weeks since inception",
@@ -926,7 +926,7 @@ class LucentAIModel:
                 
                 <p className="text-xl text-gray-300 mb-8 leading-relaxed">
                   Our proprietary technology stack combines cutting-edge AI with real-time data processing
-                  to predict market movements with unmatched <span className="text-lucent-purple font-semibold">98.7% accuracy</span>.
+                  to predict market movements with unmatched <span className="text-lucent-purple font-semibold">Accuracy</span>.
                 </p>
                 
                 <div className="flex flex-wrap gap-4">
@@ -948,7 +948,7 @@ class LucentAIModel:
                 
                 <div className="mt-8 grid grid-cols-3 gap-6">
                   {[
-                    { value: "98.7%", label: "Accuracy" },
+                    { value: "10 years+", label: "Backtesting" },
                     { value: "50ms", label: "Response Time" },
                     { value: "200+", label: "Data Sources" }
                   ].map((stat, idx) => (
@@ -982,7 +982,7 @@ class LucentAIModel:
               viewport={{ once: true }}
               className="flex flex-wrap justify-center gap-2 md:gap-6"
             >
-              {capabilities.map((cap) => (
+              {capabilities.filter(cap => cap.id !== "data").map((cap) => (
                 <button
                   key={cap.id}
                   onClick={() => setCurrentSection(cap.id)}

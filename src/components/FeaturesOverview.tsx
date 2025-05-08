@@ -39,9 +39,9 @@ const performanceData = {
     winRate: 78.4
   },
   eurekahedge: {
-    yearly: 9.2,
+    yearly: 3.1,
     monthly: 0.77,
-    sharpeRatio: 1.3,
+    sharpeRatio: 0,
     maxDrawdown: 14.7,
     winRate: 61.2
   },
@@ -143,11 +143,10 @@ const FeaturesOverview = () => {
               
               <TabsContent value="yearly" className="space-y-4">
                 <div className="text-sm text-gray-400 mb-4">
-                  Annualized Return Comparison (Last 3 Years)
+                  Annualized Return Comparison (Last 1 Year)
             </div>
             <div className="h-64">
               <AnimatedChart 
-                uptrend={true} 
                 height={250}
                 color="#8B5CF6"
               />
@@ -184,7 +183,7 @@ const FeaturesOverview = () => {
                       <span className="text-gray-400">Sharpe Ratio</span>
                       <div className="flex space-x-4">
                         <span className="text-white font-medium">{performanceData.lucent.sharpeRatio}</span>
-                        <span className="text-gray-500">{performanceData.eurekahedge.sharpeRatio}</span>
+                        
                       </div>
                     </div>
                     <div className="h-2 bg-white/10 rounded-full">
@@ -197,7 +196,7 @@ const FeaturesOverview = () => {
                       <span className="text-gray-400">Win Rate</span>
                       <div className="flex space-x-4">
                         <span className="text-white font-medium">{performanceData.lucent.winRate}%</span>
-                        <span className="text-gray-500">{performanceData.eurekahedge.winRate}%</span>
+                        
                       </div>
                     </div>
                     <div className="h-2 bg-white/10 rounded-full">
@@ -210,7 +209,7 @@ const FeaturesOverview = () => {
                       <span className="text-gray-400">Max Drawdown</span>
                       <div className="flex space-x-4">
                         <span className="text-white font-medium">-{performanceData.lucent.maxDrawdown}%</span>
-                        <span className="text-gray-500">-{performanceData.eurekahedge.maxDrawdown}%</span>
+                        
                       </div>
                     </div>
                     <div className="h-2 bg-white/10 rounded-full">
@@ -223,7 +222,7 @@ const FeaturesOverview = () => {
                       <span className="text-gray-400">Monthly Return</span>
                       <div className="flex space-x-4">
                         <span className="text-white font-medium">+{performanceData.lucent.monthly}%</span>
-                        <span className="text-gray-500">+{performanceData.eurekahedge.monthly}%</span>
+                        
                       </div>
                     </div>
                     <div className="h-2 bg-white/10 rounded-full">
@@ -275,12 +274,12 @@ const FeaturesOverview = () => {
                         <Target className="h-4 w-4 text-blue-500" />
                       </div>
                       <div>
-                        <h5 className="text-white font-medium">Win Rate Improvement</h5>
-                        <p className="text-gray-400 text-xs">Higher percentage of profitable trades</p>
+                        <h5 className="text-white font-medium">Improved Sharpe Ratio</h5>
+                        <p className="text-gray-400 text-xs">we have a shape Ratio above 1</p>
                       </div>
                     </div>
                     <div className="text-green-400 text-xl font-bold">
-                      +{(performanceData.lucent.winRate - performanceData.eurekahedge.winRate).toFixed(1)}%
+                      +{(performanceData.lucent.sharpeRatio - performanceData.eurekahedge.sharpeRatio).toFixed(1)}
                     </div>
               </div>
             </div>
@@ -670,7 +669,7 @@ const FeaturesOverview = () => {
                     <CheckCircle2 className="h-3.5 w-3.5 text-green-500" />
                   </div>
                   <p className="text-gray-300">
-                    <span className="text-white font-medium">410% higher returns</span> than the Eurekahedge FX Fund Index over the last 3 years
+                    <span className="text-white font-medium">13x higher returns</span> than the Eurekahedge FX Fund Index over the last 1 year
                   </p>
                 </li>
                 <li className="flex items-start space-x-3">
