@@ -31,7 +31,7 @@ import { Badge } from "@/components/ui/badge";
 
 // Performance comparison data
 const performanceData = {
-  lucent: {
+  pinaxa: {
     yearly: 37.8,
     monthly: 3.15,
     sharpeRatio: 2.8,
@@ -73,7 +73,7 @@ const FeaturesOverview = () => {
               AI-Driven Trading Performance
             </h3>
             <p className="text-gray-300 mb-6 text-lg">
-              Lucent AI consistently outperforms industry benchmarks including the Eurekahedge FX Fund by leveraging sophisticated artificial intelligence algorithms that analyze real-time market data across multiple timeframes.
+              Pinaxa Labs consistently outperforms industry benchmarks including the Eurekahedge FX Fund by leveraging sophisticated artificial intelligence algorithms that analyze real-time market data across multiple timeframes.
             </p>
             
             <ul className="space-y-6 mb-8">
@@ -155,9 +155,9 @@ const FeaturesOverview = () => {
                   <div>
                     <div className="flex items-center mb-1">
                 <div className="h-3 w-3 rounded-full bg-lucent-purple mr-2"></div>
-                <span className="text-sm text-white">Lucent AI</span>
+                <span className="text-sm text-white">Pinaxa Labs</span>
               </div>
-                    <div className="text-green-400 font-bold text-2xl">+{performanceData.lucent.yearly}%</div>
+                    <div className="text-green-400 font-bold text-2xl">+{performanceData.pinaxa.yearly}%</div>
                   </div>
                   <div>
                     <div className="flex items-center mb-1">
@@ -182,12 +182,12 @@ const FeaturesOverview = () => {
                     <div className="flex justify-between text-sm mb-1">
                       <span className="text-gray-400">Sharpe Ratio</span>
                       <div className="flex space-x-4">
-                        <span className="text-white font-medium">{performanceData.lucent.sharpeRatio}</span>
+                        <span className="text-white font-medium">{performanceData.pinaxa.sharpeRatio}</span>
                         
                       </div>
                     </div>
                     <div className="h-2 bg-white/10 rounded-full">
-                      <div className="h-2 rounded-full bg-lucent-purple" style={{ width: `${(performanceData.lucent.sharpeRatio / 3) * 100}%` }}></div>
+                      <div className="h-2 rounded-full bg-lucent-purple" style={{ width: `${(performanceData.pinaxa.sharpeRatio / 3) * 100}%` }}></div>
                     </div>
                   </div>
                   
@@ -195,12 +195,12 @@ const FeaturesOverview = () => {
                     <div className="flex justify-between text-sm mb-1">
                       <span className="text-gray-400">Win Rate</span>
                       <div className="flex space-x-4">
-                        <span className="text-white font-medium">{performanceData.lucent.winRate}%</span>
+                        <span className="text-white font-medium">{performanceData.pinaxa.winRate}%</span>
                         
                       </div>
                     </div>
                     <div className="h-2 bg-white/10 rounded-full">
-                      <div className="h-2 rounded-full bg-green-500" style={{ width: `${performanceData.lucent.winRate}%` }}></div>
+                      <div className="h-2 rounded-full bg-green-500" style={{ width: `${performanceData.pinaxa.winRate}%` }}></div>
                     </div>
                   </div>
                   
@@ -208,12 +208,12 @@ const FeaturesOverview = () => {
                     <div className="flex justify-between text-sm mb-1">
                       <span className="text-gray-400">Max Drawdown</span>
                       <div className="flex space-x-4">
-                        <span className="text-white font-medium">-{performanceData.lucent.maxDrawdown}%</span>
+                        <span className="text-white font-medium">-{performanceData.pinaxa.maxDrawdown}%</span>
                         
                       </div>
                     </div>
                     <div className="h-2 bg-white/10 rounded-full">
-                      <div className="h-2 rounded-full bg-red-500" style={{ width: `${performanceData.lucent.maxDrawdown * 1.5}%` }}></div>
+                      <div className="h-2 rounded-full bg-red-500" style={{ width: `${performanceData.pinaxa.maxDrawdown * 1.5}%` }}></div>
                     </div>
                   </div>
                   
@@ -221,12 +221,12 @@ const FeaturesOverview = () => {
                     <div className="flex justify-between text-sm mb-1">
                       <span className="text-gray-400">Monthly Return</span>
                       <div className="flex space-x-4">
-                        <span className="text-white font-medium">+{performanceData.lucent.monthly}%</span>
+                        <span className="text-white font-medium">+{performanceData.pinaxa.monthly}%</span>
                         
                       </div>
                     </div>
                     <div className="h-2 bg-white/10 rounded-full">
-                      <div className="h-2 rounded-full bg-blue-500" style={{ width: `${performanceData.lucent.monthly * 15}%` }}></div>
+                      <div className="h-2 rounded-full bg-blue-500" style={{ width: `${performanceData.pinaxa.monthly * 15}%` }}></div>
                     </div>
                   </div>
                 </div>
@@ -249,7 +249,7 @@ const FeaturesOverview = () => {
                       </div>
                     </div>
                     <div className="text-green-400 text-xl font-bold">
-                      +{(performanceData.lucent.yearly - performanceData.eurekahedge.yearly).toFixed(1)}%
+                      +{(performanceData.pinaxa.yearly - performanceData.eurekahedge.yearly).toFixed(1)}%
                     </div>
                   </div>
                   
@@ -264,12 +264,12 @@ const FeaturesOverview = () => {
                       </div>
                     </div>
                     <div className="text-green-400 text-xl font-bold">
-                      -{(performanceData.eurekahedge.maxDrawdown - performanceData.lucent.maxDrawdown).toFixed(1)}%
+                      -{(performanceData.eurekahedge.maxDrawdown - performanceData.pinaxa.maxDrawdown).toFixed(1)}%
                     </div>
-            </div>
+                  </div>
                   
                   <div className="flex items-center justify-between p-4 bg-white/5 rounded-lg">
-              <div className="flex items-center">
+                    <div className="flex items-center">
                       <div className="h-8 w-8 rounded-full bg-blue-500/20 flex items-center justify-center mr-3">
                         <Target className="h-4 w-4 text-blue-500" />
                       </div>
@@ -279,10 +279,55 @@ const FeaturesOverview = () => {
                       </div>
                     </div>
                     <div className="text-green-400 text-xl font-bold">
-                      +{(performanceData.lucent.sharpeRatio - performanceData.eurekahedge.sharpeRatio).toFixed(1)}
+                      +{(performanceData.pinaxa.sharpeRatio - performanceData.eurekahedge.sharpeRatio).toFixed(1)}
                     </div>
-              </div>
-            </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-4 bg-white/5 rounded-lg">
+                    <div className="flex items-center">
+                      <div className="h-8 w-8 rounded-full bg-blue-500/20 flex items-center justify-center mr-3">
+                        <Target className="h-4 w-4 text-blue-500" />
+                      </div>
+                      <div>
+                        <h5 className="text-white font-medium">Improved Win Rate</h5>
+                        <p className="text-gray-400 text-xs">we have a win rate above 75%</p>
+                      </div>
+                    </div>
+                    <div className="text-green-400 text-xl font-bold">
+                      +{(performanceData.pinaxa.winRate - performanceData.eurekahedge.winRate).toFixed(1)}%
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-4 bg-white/5 rounded-lg">
+                    <div className="flex items-center">
+                      <div className="h-8 w-8 rounded-full bg-blue-500/20 flex items-center justify-center mr-3">
+                        <Target className="h-4 w-4 text-blue-500" />
+                      </div>
+                      <div>
+                        <h5 className="text-white font-medium">Lower Drawdown</h5>
+                        <p className="text-gray-400 text-xs">we have a lower drawdown than competitors</p>
+                      </div>
+                    </div>
+                    <div className="text-green-400 text-xl font-bold">
+                      -{(performanceData.eurekahedge.maxDrawdown - performanceData.pinaxa.maxDrawdown).toFixed(1)}%
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-4 bg-white/5 rounded-lg">
+                    <div className="flex items-center">
+                      <div className="h-8 w-8 rounded-full bg-blue-500/20 flex items-center justify-center mr-3">
+                        <Target className="h-4 w-4 text-blue-500" />
+                      </div>
+                      <div>
+                        <h5 className="text-white font-medium">Higher Monthly Return</h5>
+                        <p className="text-gray-400 text-xs">we have a higher monthly return than competitors</p>
+                      </div>
+                    </div>
+                    <div className="text-green-400 text-xl font-bold">
+                      +{(performanceData.pinaxa.monthly - performanceData.eurekahedge.monthly).toFixed(1)}%
+                    </div>
+                  </div>
+                </div>
               </TabsContent>
             </Tabs>
           </div>
@@ -630,7 +675,7 @@ const FeaturesOverview = () => {
                 Verified Performance
               </Badge>
               <h3 className="text-2xl md:text-3xl font-bold mb-6">
-                Why Professional Traders Choose Lucent AI
+                Why Professional Traders Choose Pinaxa Labs
               </h3>
               <p className="text-gray-300 mb-8">
                 Our proprietary AI trading system consistently outperforms top hedge funds and industry benchmarks, providing professional and retail traders with institutional-grade analysis and execution.
@@ -638,15 +683,15 @@ const FeaturesOverview = () => {
               
               <div className="grid grid-cols-2 gap-6 mb-8">
                 <div>
-                  <p className="text-3xl font-bold text-white">+{performanceData.lucent.yearly}%</p>
+                  <p className="text-3xl font-bold text-white">+{performanceData.pinaxa.yearly}%</p>
                   <p className="text-gray-400">Annual Return</p>
                 </div>
                 <div>
-                  <p className="text-3xl font-bold text-white">{performanceData.lucent.sharpeRatio}</p>
+                  <p className="text-3xl font-bold text-white">{performanceData.pinaxa.sharpeRatio}</p>
                   <p className="text-gray-400">Sharpe Ratio</p>
                 </div>
                 <div>
-                  <p className="text-3xl font-bold text-white">{performanceData.lucent.winRate}%</p>
+                  <p className="text-3xl font-bold text-white">{performanceData.pinaxa.winRate}%</p>
                   <p className="text-gray-400">Win Rate</p>
                 </div>
                 <div>
@@ -677,7 +722,7 @@ const FeaturesOverview = () => {
                     <CheckCircle2 className="h-3.5 w-3.5 text-green-500" />
                   </div>
                   <p className="text-gray-300">
-                    <span className="text-white font-medium">{(performanceData.eurekahedge.maxDrawdown - performanceData.lucent.maxDrawdown).toFixed(1)}% lower maximum drawdown</span> during market volatility compared to typical FX hedge funds
+                    <span className="text-white font-medium">{(performanceData.eurekahedge.maxDrawdown - performanceData.pinaxa.maxDrawdown).toFixed(1)}% lower maximum drawdown</span> during market volatility compared to typical FX hedge funds
                   </p>
                 </li>
                 <li className="flex items-start space-x-3">
@@ -720,7 +765,7 @@ const FeaturesOverview = () => {
               Ready to Transform Your Trading?
             </h3>
             <p className="text-gray-300 mb-6">
-              Join thousands of traders who have already enhanced their trading performance with Lucent AI's cutting-edge technology.
+              Join thousands of traders who have already enhanced their trading performance with Pinaxa Labs' cutting-edge technology.
             </p>
             <div className="flex flex-wrap gap-4">
               <Button className="bg-lucent-purple hover:bg-lucent-purple/90 text-white font-medium py-2 px-4">

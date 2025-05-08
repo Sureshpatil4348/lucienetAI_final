@@ -148,7 +148,7 @@ const CubeAnimation = () => {
 
 const TechnologyPage = () => {
   useEffect(() => {
-    document.title = "Technology - Lucent AI";
+    document.title = "Technology - Pinaxa Labs";
     
     // Add required CSS for cube animation and data flow
     const styleEl = document.createElement('style');
@@ -199,10 +199,11 @@ from sklearn.ensemble import RandomForestClassifier
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Dropout
 
-class LucentAIModel:
-    def __init__(self, confidence_threshold=0.85):
-        self.models = []
-        self.confidence_threshold = confidence_threshold
+class PinaxaModel:
+    def __init__(self):
+        self.name = "Pinaxa AI Trading Model"
+        self.version = "2.0"
+        self.description = "Advanced machine learning model for market prediction"
         
     def prepare_features(self, data):
         # Complex feature engineering
@@ -789,7 +790,7 @@ class LucentAIModel:
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-white">Global Performance Edge</h3>
-                  <p className="text-gray-400 mt-1">How Lucent AI outperforms traditional trading approaches</p>
+                  <p className="text-gray-400 mt-1">How Pinaxa Labs outperforms traditional trading approaches</p>
                 </div>
               </div>
               
@@ -811,7 +812,7 @@ class LucentAIModel:
                         <div className="flex justify-between text-sm mb-1">
                           <span className="text-gray-400">{item.metric}</span>
                           <div className="flex items-center space-x-1 text-xs">
-                            <span className="px-2 py-0.5 rounded bg-purple-500/20 text-purple-400">Lucent AI</span>
+                            <span className="px-2 py-0.5 rounded bg-purple-500/20 text-purple-400">Pinaxa Labs</span>
                             <span className="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400">Hedge Fund Avg.</span>
                             <span className="px-2 py-0.5 rounded bg-gray-500/20 text-gray-400">S&P 500</span>
                           </div>
@@ -844,7 +845,7 @@ class LucentAIModel:
                             </span>
                           </motion.div>
                           
-                          {/* Lucent AI */}
+                          {/* Pinaxa Labs */}
                           <motion.div 
                             initial={{ width: 0 }}
                             whileInView={{ width: item.lower ? `${(1-(item.lucent/30))*100}%` : `${(item.lucent/40)*100}%` }}
@@ -1019,7 +1020,7 @@ class LucentAIModel:
             transition={{ duration: 0.8 }}
             className="text-center py-16 px-4 sm:px-6 lg:px-8 rounded-2xl bg-gradient-to-r from-lucent-purple/20 via-blue-900/20 to-purple-900/20 border border-lucent-purple/30"
           >
-            <h2 className="text-3xl font-bold mb-4">Experience the Lucent AI Advantage</h2>
+            <h2 className="text-3xl font-bold mb-4">Experience the Pinaxa Labs Advantage</h2>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
               Join thousands of traders who are leveraging our breakthrough technology to make smarter, data-driven decisions in the market.
             </p>

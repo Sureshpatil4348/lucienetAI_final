@@ -105,9 +105,9 @@ const Navbar = () => {
               transition={{ duration: 0.5 }}
               className="text-white font-bold text-2xl flex items-center"
             >
-              <span className="text-lucent-purple-light">LUCENT</span>
+              <span className="text-lucent-purple-light">PINAXA</span>
               <span className="relative">
-                AI
+                LABS
                 <span className="absolute -top-1 -right-3 h-2 w-2 bg-lucent-purple rounded-full animate-pulse"></span>
               </span>
             </motion.div>

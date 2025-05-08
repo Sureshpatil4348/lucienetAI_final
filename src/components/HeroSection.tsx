@@ -261,7 +261,7 @@ const HeroSection = () => {
               variants={itemVariants}
               className="inline-block bg-lucent-purple/20 text-lucent-purple rounded-full px-3 py-1 text-sm font-medium mb-4"
             >
-              AI-Powered Trading Analytics
+              Pinaxa Labs Trading Analytics
             </motion.div>
             
             <motion.h1 
